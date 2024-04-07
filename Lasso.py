@@ -73,7 +73,7 @@ def sparse_encode(x, weight, alpha=1.0, z0=None, algorithm='ista', init=None,
 
 
 def split_bregman(A, y, x0=None, alpha=1.0, lambd=1.0, maxiter=20, niter_inner=5,
-                  tol=1e-10, tau=1., beta=1.0, verbose=False):
+                  tol=1e-10, tau=1., sb_params_batch=False, verbose=False):
     """Split Bregman for L1-regularized least squares.
 
     Parameters
@@ -109,12 +109,13 @@ def split_bregman(A, y, x0=None, alpha=1.0, lambd=1.0, maxiter=20, niter_inner=5
         Iteration number of outer loop upon termination
 
     """
-    if output_net in globals():
-        maxiter = output_net['maxiter']
-        niter_inner = output_net['niter_inner']
-        alpha = output_net['alpha']
-        beta = output_net['total_variation_rate']
+    if sb_params_batch is not False:
+        maxiter = int(sb_params_batch['maxiter'])
+        niter_inner = int(sb_params_batch['niter_inner'])
+        alpha = sb_params_batch['alpha']
+        beta = np.float32(sb_params_batch['total_variation_rate'])
 
+    assert isinstance(alpha, (int, float, torch.Tensor)), "alpha must be a scalar value or a tensor with shape [1]"
     assert y.dim() == 2
     assert A.dim() == 2
     assert y.shape[1] == A.shape[0]
@@ -136,6 +137,7 @@ def split_bregman(A, y, x0=None, alpha=1.0, lambd=1.0, maxiter=20, niter_inner=5
     AtA = torch.mm(A.T, A) / alpha
     AtA.diagonal(dim1=-2, dim2=-1).add_(lambd)
     AtA_inv = torch.cholesky_inverse(torch.linalg.cholesky(AtA))
+
 
     update = y.new_tensor(float('inf'))
     for itn in range(maxiter):

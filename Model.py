@@ -5,33 +5,80 @@ import math
 from Lasso import sparse_encode
 from testers import experiment_berg_params
 from testers import plot_rec_image
+import numpy as np
 
 
-def breg_rec(diffuser_batch, bucket_batch, batch_size, output_net):
-    if diffuser_batch.dim() == 3:
-        img_dim = diffuser_batch.shape[2]  # diffuser in shape (batch_size, n_masks, img_dim)
-    else:
-        img_dim = diffuser_batch.shape[1]  # diffuser in shape (n_masks, img_dim)
-
+def breg_rec(diffuser, bucket_batch, batch_size, sb_params_batch):
+    img_dim = diffuser.shape[1]  # diffuser in shape (n_masks, img_dim)
     recs_container = torch.zeros(batch_size, img_dim)
     for rec_ind in range(batch_size):
         maxiter = 1
         niter_inner = 1
         alpha = 1
         # experiment_berg_params(bucket_batch[rec_ind], diffuser_batch[rec_ind], folder_path='temp/Gan/new')
-
-        if diffuser_batch.dim() == 3:
-            diffuser = diffuser_batch[rec_ind]
-        else:
-            diffuser = diffuser_batch
-
         rec = sparse_encode(bucket_batch[rec_ind], diffuser, maxiter=maxiter, niter_inner=niter_inner, alpha=alpha,
-                            algorithm='split-bregman', output_net=output_net)
+                            algorithm='split-bregman', sb_params_batch=sb_params_batch)
         # plot_rec_image(rec, maxiter, niter_inner, alpha)
         recs_container = recs_container.clone()
         recs_container[rec_ind] = rec
 
     return recs_container
+
+
+class MyModel(nn.Module):
+    def __init__(self, img_dim, n_masks):
+        super(MyModel, self).__init__()
+        pic_width = int(np.sqrt(img_dim))
+        # Image processing layers
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+
+        # Adjusting input size for fully connected layers
+        fc_input_size = 64 * (pic_width // 4) * (pic_width // 4)  # Adjust input size based on the image dimensions
+
+        # Fully connected layers
+        self.fc1 = nn.Linear(fc_input_size, 256)
+        self.fc2 = nn.Linear(256, 128)
+
+        # Output layers for diffuser and probabilistic vectors
+        self.fc_diff = nn.Linear(128, n_masks*img_dim)
+        self.prob_vector1 = nn.Linear(128, 10)  # Adjust output size based on the number of classes
+        self.prob_vector2 = nn.Linear(128, 10)
+        self.prob_vector3 = nn.Linear(128, 10)
+        self.prob_vector4 = nn.Linear(128, 10)
+
+    def forward(self, x_i):
+        x = self.conv1(x_i)
+        # if torch.isnan(x).any().item():
+        #     print(x)
+
+        x = self.bn1(x)
+        x = torch.relu(x)
+
+        x = self.pool(x)
+        x = self.conv2(x)
+        x = torch.relu(x)
+        x = self.pool(x)
+
+        x = torch.flatten(x, 1)
+
+        x = self.fc1(x)
+        x = torch.relu(x)
+        x = self.fc2(x)
+        x = torch.relu(x)
+
+
+        diffuser = self.fc_diff(x)
+        diffuser = torch.sigmoid(diffuser)  # Apply sigmoid activation for diffuser
+
+        prob_vector1 = self.prob_vector1(x)
+        prob_vector2 = self.prob_vector2(x)
+        prob_vector3 = self.prob_vector3(x)
+        prob_vector4 = self.prob_vector4(x)
+
+        return diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4
 
 
 class Gen_with_p_sb(nn.Module):
@@ -50,10 +97,11 @@ class Gen_with_p_sb(nn.Module):
         self.bn3 = nn.BatchNorm1d(n_masks * img_dim)
         self.sigmoid = nn.Sigmoid()
 
-        self.linear2_params = nn.Linear(128, 64)
+        self.linear2_params = nn.Linear(256, 64)
         self.relu2_params = nn.ReLU()
 
         self.linear_params = nn.Linear(64, 4)  # 4 parameters: maxiter, niter_inner, alpha, total_variation_rate
+        self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x):
         x = self.linear1(x)
@@ -64,27 +112,17 @@ class Gen_with_p_sb(nn.Module):
         x = self.relu2(x)
 
 
-        diffuser_x = self.linear3(x)
-        diffuser_x = self.bn3(diffuser_x)
-        diffuser_x = self.sigmoid(diffuser_x)
+        diffuser = self.linear3(x)
+        diffuser = self.bn3(diffuser)
+        diffuser = self.sigmoid(diffuser)
 
         # Compute path for parameters
         params_x = self.linear2_params(x)
         params_x = self.relu2_params(params_x)
         params_x = self.linear_params(params_x)
+        params_x = self.softmax(params_x)
 
-        # Extracting individual parameters
-        maxiter = torch.round(torch.sigmoid(params_x[:, 0].unsqueeze(1)) * 100)  # Scale to desired range
-        niter_inner = torch.round(torch.sigmoid(params_x[:, 1].unsqueeze(1)) * 20)  # Scale to desired range
-        alpha = torch.sigmoid(params_x[:, 2].unsqueeze(1))
-        total_variation_rate = torch.sigmoid(params_x[:, 3].unsqueeze(1))
-        return {
-            'diffuser': diffuser_x,
-            'maxiter': maxiter,
-            'niter_inner': niter_inner,
-            'alpha': alpha,
-            'total_variation_rate': total_variation_rate
-        }
+        return
 
 
 class Gen(nn.Module):

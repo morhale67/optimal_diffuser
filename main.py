@@ -20,21 +20,20 @@ def main(wb_flag=False):
         # p = load_config_parameters(p)
     else:
         search_parameters(p)
+        # run_model(p, False)
 
 
 def search_parameters(p):
-    for z_dim in [28, 128, 512]:
-        p['z_dim'] = z_dim
+    for lr in [0.001, 0.0001, 0.00001]:
+        p['lr'] = lr
         for bs in [2, 4, 8]:
             p['batch_size'] = bs
             for weight_decay in [1e-7, 5e-7, 10e-7]:
                 p['weight_decay'] = weight_decay
-                for TV_beta in [0.1, 0.5, 1.0, 10, 100]:
-                    p['TV_beta'] = TV_beta
-                    for cr in [1, 2, 5, 10]:
-                        p['cr'] = cr
-                        p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-                        run_model(p, False)
+                for cr in [1, 2, 5, 10]:
+                    p['cr'] = cr
+                    p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
+                    run_model(p, False)
     print('finished successfully')
 
 

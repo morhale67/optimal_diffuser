@@ -6,12 +6,14 @@ from LogFunctions import print_and_log_message
 import math
 from OutputHandler import save_orig_img, save_outputs, calc_cumu_ssim_batch, save_randomize_outputs, calc_cumu_psnr_batch
 import numpy as np
+from Training import get_sb_params_batch
 
 
-def test_net(epoch, model, loader, device, log_path, folder_path, batch_size, z_dim, img_dim, cr,
-             TV_beta, wb_flag, save_img=False):
-    model.eval()
-    model.to(device)
+def test_net(epoch, network, loader, device, log_path, folder_path, batch_size, img_dim, n_masks,
+             wb_flag, save_img=False):
+    network.eval()
+    network.to(device)
+    criterion = nn.MSELoss()
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(loader.batch_sampler)
     n_samples = n_batchs * batch_size
@@ -19,21 +21,20 @@ def test_net(epoch, model, loader, device, log_path, folder_path, batch_size, z_
 
     for batch_index, sim_bucket_tensor in enumerate(loader):
         sim_object, _ = sim_bucket_tensor
-        sim_object.to(device)
-        noise = torch.randn(batch_size, z_dim, requires_grad=True).to(device)
-        output_net = model(noise)
-        sim_diffuser = output_net['diffuser_x']
-        sim_diffuser_reshaped = sim_diffuser.reshape(batch_size, math.floor(img_dim / cr), img_dim)
-
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
+        input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
+        diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4 = network(input_sim_object)
+        diffuser = diffuser.reshape(batch_size, n_masks, img_dim)
+        diffuser = diffuser[0]
         sim_object = sim_object.transpose(1, 2)
-        sim_bucket = torch.matmul(sim_diffuser_reshaped, sim_object)
+        sim_bucket = torch.matmul(diffuser, sim_object)
         sim_bucket = torch.transpose(sim_bucket, 1, 2)
-        reconstruct_imgs_batch = breg_rec(sim_diffuser_reshaped, sim_bucket, batch_size, output_net)
+
+        sb_params_batch = get_sb_params_batch(prob_vector1, prob_vector2, prob_vector3, prob_vector4, 0)
+        reconstruct_imgs_batch = breg_rec(diffuser, sim_bucket, batch_size, sb_params_batch).to(device)
 
         reconstruct_imgs_batch = reconstruct_imgs_batch.to(device)
         sim_object = torch.squeeze(sim_object)
-        criterion = nn.MSELoss()
         loss = criterion(reconstruct_imgs_batch, sim_object)
         cumu_loss += loss.item()
         torch.cuda.empty_cache()  # Before starting a new forward/backward pass
