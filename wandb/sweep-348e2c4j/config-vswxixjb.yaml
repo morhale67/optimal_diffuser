@@ -1,0 +1,14 @@
+wandb_version: 1
+
+TV_beta:
+  value: 1
+batch_size:
+  value: 2
+cr:
+  value: 10
+pic_width:
+  value: 28
+weight_decay:
+  value: 1.0e-07
+z_dim:
+  value: 256

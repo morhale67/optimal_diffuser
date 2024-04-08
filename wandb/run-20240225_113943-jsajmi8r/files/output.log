@@ -1,0 +1,219 @@
+INFO: This is a summery of the run:
+INFO: Batch size for this run: 2
+INFO: Size of original image: 8 X 8
+INFO: number of masks: 12
+INFO: Compression ratio: 5
+INFO: number of epochs per lr: [5, 30, 5]
+INFO: diff learning rate in the run: [0.1, 0.01, 0.001]
+INFO: optimizer: adam
+INFO: weight_decay: 5e-07
+INFO: ***************************************************************************
+WARNING: learning rate: 0.1
+WARNING: Epoch number 0, batch number 0/40:       batch loss 0.03831830620765686
+WARNING: Epoch number 0, batch number 1/40:       batch loss 0.057100147008895874
+WARNING: Epoch number 0, batch number 2/40:       batch loss 0.02765095978975296
+WARNING: Epoch number 0, batch number 3/40:       batch loss 0.029026594012975693
+WARNING: Epoch number 0, batch number 4/40:       batch loss 0.032200101763010025
+WARNING: Epoch number 0, batch number 5/40:       batch loss 0.0436725839972496
+WARNING: Epoch number 0, batch number 6/40:       batch loss 0.03345978260040283
+WARNING: Epoch number 0, batch number 7/40:       batch loss 0.03000589646399021
+WARNING: Epoch number 0, batch number 8/40:       batch loss 0.02811156027019024
+WARNING: Epoch number 0, batch number 9/40:       batch loss 0.042441535741090775
+WARNING: Epoch number 0, batch number 10/40:       batch loss 0.043926309794187546
+WARNING: Epoch number 0, batch number 11/40:       batch loss 0.0246526300907135
+WARNING: Epoch number 0, batch number 12/40:       batch loss 0.023481810465455055
+WARNING: Epoch number 0, batch number 13/40:       batch loss 0.01830071024596691
+WARNING: Epoch number 0, batch number 14/40:       batch loss 0.022174233570694923
+WARNING: Epoch number 0, batch number 15/40:       batch loss 0.026687685400247574
+WARNING: Epoch number 0, batch number 16/40:       batch loss 0.03642474114894867
+WARNING: Epoch number 0, batch number 17/40:       batch loss 0.03223797678947449
+WARNING: Epoch number 0, batch number 18/40:       batch loss 0.017281655222177505
+WARNING: Epoch number 0, batch number 19/40:       batch loss 0.03433913365006447
+WARNING: Epoch number 0, batch number 20/40:       batch loss 0.03902581334114075
+WARNING: Epoch number 0, batch number 21/40:       batch loss 0.015059455297887325
+WARNING: Epoch number 0, batch number 22/40:       batch loss 0.0351996012032032
+WARNING: Epoch number 0, batch number 23/40:       batch loss 0.02106347307562828
+WARNING: Epoch number 0, batch number 24/40:       batch loss 0.024664806202054024
+WARNING: Epoch number 0, batch number 25/40:       batch loss 0.023755645379424095
+WARNING: Epoch number 0, batch number 26/40:       batch loss 0.023259345442056656
+WARNING: Epoch number 0, batch number 27/40:       batch loss 0.02998354844748974
+WARNING: Epoch number 0, batch number 28/40:       batch loss 0.023079903796315193
+WARNING: Epoch number 0, batch number 29/40:       batch loss 0.023563018068671227
+WARNING: Epoch number 0, batch number 30/40:       batch loss 0.031871337443590164
+WARNING: Epoch number 0, batch number 31/40:       batch loss 0.02365918643772602
+WARNING: Epoch number 0, batch number 32/40:       batch loss 0.03832661360502243
+WARNING: Epoch number 0, batch number 33/40:       batch loss 0.03665142133831978
+WARNING: Epoch number 0, batch number 34/40:       batch loss 0.02257544733583927
+WARNING: Epoch number 0, batch number 35/40:       batch loss 0.02593625895678997
+WARNING: Epoch number 0, batch number 36/40:       batch loss 0.01756373606622219
+WARNING: Epoch number 0, batch number 37/40:       batch loss 0.027111148461699486
+WARNING: Epoch number 0, batch number 38/40:       batch loss 0.027998926118016243
+WARNING: Epoch number 0, batch number 39/40:       batch loss 0.02405897155404091
+WARNING: Epoch: 1 	Training Loss: 0.014699
+WARNING: Time for epoch 1 : 1 sec
+WARNING: lr for epoch 1 is 0.10000
+Masks4_TV_beta_10_bs_2_cr_5_picw_8_wd_5e-07_z_100
+Deleted folder: Results/Masks4_TV_beta_10_bs_2_cr_5_picw_8_wd_5e-07_z_100
+Name of log file: Log_25_02_2024__11_39_50.log
+Build Model Successfully
+WARNING: Epoch number 0, batch number 0/10:       batch loss 0.015448901802301407
+WARNING: Epoch number 0, batch number 1/10:       batch loss 0.019247623160481453
+WARNING: Epoch number 0, batch number 2/10:       batch loss 0.023160293698310852
+WARNING: Epoch number 0, batch number 3/10:       batch loss 0.017417877912521362
+WARNING: Epoch number 0, batch number 4/10:       batch loss 0.017857501283288002
+WARNING: Epoch number 0, batch number 5/10:       batch loss 0.024054642766714096
+WARNING: Epoch number 0, batch number 6/10:       batch loss 0.026233281940221786
+WARNING: Epoch number 0, batch number 7/10:       batch loss 0.018900610506534576
+WARNING: Epoch number 0, batch number 8/10:       batch loss 0.025723954662680626
+WARNING: Epoch number 0, batch number 9/10:       batch loss 0.019271567463874817
+WARNING: Epoch number 1, batch number 0/40:       batch loss 0.02675282210111618
+WARNING: Epoch number 1, batch number 1/40:       batch loss 0.028571095317602158
+WARNING: Epoch number 1, batch number 2/40:       batch loss 0.02565317414700985
+WARNING: Epoch number 1, batch number 3/40:       batch loss 0.022257711738348007
+WARNING: Epoch number 1, batch number 4/40:       batch loss 0.01989249512553215
+WARNING: Epoch number 1, batch number 5/40:       batch loss 0.018228309229016304
+WARNING: Epoch number 1, batch number 6/40:       batch loss 0.037155553698539734
+WARNING: Epoch number 1, batch number 7/40:       batch loss 0.018998658284544945
+WARNING: Epoch number 1, batch number 8/40:       batch loss 0.02466343715786934
+WARNING: Epoch number 1, batch number 9/40:       batch loss 0.03767583519220352
+WARNING: Epoch number 1, batch number 10/40:       batch loss 0.013626794330775738
+WARNING: Epoch number 1, batch number 11/40:       batch loss 0.030749792233109474
+WARNING: Epoch number 1, batch number 12/40:       batch loss 0.029550286009907722
+WARNING: Epoch number 1, batch number 13/40:       batch loss 0.021141067147254944
+WARNING: Epoch number 1, batch number 14/40:       batch loss 0.023001164197921753
+WARNING: Epoch number 1, batch number 15/40:       batch loss 0.01869041845202446
+WARNING: Epoch number 1, batch number 16/40:       batch loss 0.02251863107085228
+WARNING: Epoch number 1, batch number 17/40:       batch loss 0.019079241901636124
+WARNING: Epoch number 1, batch number 18/40:       batch loss 0.02145378105342388
+WARNING: Epoch number 1, batch number 19/40:       batch loss 0.02050863392651081
+WARNING: Epoch number 1, batch number 20/40:       batch loss 0.03413098305463791
+WARNING: Epoch number 1, batch number 21/40:       batch loss 0.014645269140601158
+WARNING: Epoch number 1, batch number 22/40:       batch loss 0.02261161059141159
+WARNING: Epoch number 1, batch number 23/40:       batch loss 0.02552669309079647
+WARNING: Epoch number 1, batch number 24/40:       batch loss 0.01823301985859871
+WARNING: Epoch number 1, batch number 25/40:       batch loss 0.016908839344978333
+WARNING: Epoch number 1, batch number 26/40:       batch loss 0.02153521403670311
+WARNING: Epoch number 1, batch number 27/40:       batch loss 0.017621085047721863
+WARNING: Epoch number 1, batch number 28/40:       batch loss 0.023302040994167328
+WARNING: Epoch number 1, batch number 29/40:       batch loss 0.031764402985572815
+WARNING: Epoch number 1, batch number 30/40:       batch loss 0.02149050682783127
+WARNING: Epoch number 1, batch number 31/40:       batch loss 0.0192053634673357
+WARNING: Epoch number 1, batch number 32/40:       batch loss 0.01584297977387905
+WARNING: Epoch number 1, batch number 33/40:       batch loss 0.022039949893951416
+WARNING: Epoch number 1, batch number 34/40:       batch loss 0.021792637184262276
+WARNING: Epoch number 1, batch number 35/40:       batch loss 0.02390754222869873
+WARNING: Epoch number 1, batch number 36/40:       batch loss 0.02004971168935299
+WARNING: Epoch number 1, batch number 37/40:       batch loss 0.020813992246985435
+WARNING: Epoch number 1, batch number 38/40:       batch loss 0.019203413277864456
+WARNING: Epoch number 1, batch number 39/40:       batch loss 0.013973498716950417
+WARNING: Epoch: 2 	Training Loss: 0.011310
+WARNING: Time for epoch 2 : 1 sec
+WARNING: lr for epoch 2 is 0.10000
+WARNING: Epoch number 1, batch number 0/10:       batch loss 0.021619101986289024
+WARNING: Epoch number 1, batch number 1/10:       batch loss 0.01875333860516548
+WARNING: Epoch number 1, batch number 2/10:       batch loss 0.01894742250442505
+WARNING: Epoch number 1, batch number 3/10:       batch loss 0.014127645641565323
+WARNING: Epoch number 1, batch number 4/10:       batch loss 0.018607597798109055
+WARNING: Epoch number 1, batch number 5/10:       batch loss 0.010772333480417728
+WARNING: Epoch number 1, batch number 6/10:       batch loss 0.017891015857458115
+WARNING: Epoch number 1, batch number 7/10:       batch loss 0.021400369703769684
+WARNING: Epoch number 1, batch number 8/10:       batch loss 0.02208375558257103
+WARNING: Epoch number 1, batch number 9/10:       batch loss 0.012918783351778984
+WARNING: Epoch number 2, batch number 0/40:       batch loss 0.011861592531204224
+WARNING: Epoch number 2, batch number 1/40:       batch loss 0.012444847263395786
+WARNING: Epoch number 2, batch number 2/40:       batch loss 0.015870455652475357
+WARNING: Epoch number 2, batch number 3/40:       batch loss 0.011828068643808365
+WARNING: Epoch number 2, batch number 4/40:       batch loss 0.022807098925113678
+WARNING: Epoch number 2, batch number 5/40:       batch loss 0.012405671179294586
+WARNING: Epoch number 2, batch number 6/40:       batch loss 0.0169608686119318
+WARNING: Epoch number 2, batch number 7/40:       batch loss 0.023967744782567024
+WARNING: Epoch number 2, batch number 8/40:       batch loss 0.019193599000573158
+WARNING: Epoch number 2, batch number 9/40:       batch loss 0.018594393506646156
+WARNING: Epoch number 2, batch number 10/40:       batch loss 0.014553116634488106
+WARNING: Epoch number 2, batch number 11/40:       batch loss 0.014041758142411709
+WARNING: Epoch number 2, batch number 12/40:       batch loss 0.02130843512713909
+WARNING: Epoch number 2, batch number 13/40:       batch loss 0.025636721402406693
+WARNING: Epoch number 2, batch number 14/40:       batch loss 0.024673249572515488
+WARNING: Epoch number 2, batch number 15/40:       batch loss 0.02415233850479126
+WARNING: Epoch number 2, batch number 16/40:       batch loss 0.017335345968604088
+WARNING: Epoch number 2, batch number 17/40:       batch loss 0.01659584417939186
+WARNING: Epoch number 2, batch number 18/40:       batch loss 0.020562659949064255
+WARNING: Epoch number 2, batch number 19/40:       batch loss 0.0068665468133986
+WARNING: Epoch number 2, batch number 20/40:       batch loss 0.017755188047885895
+WARNING: Epoch number 2, batch number 21/40:       batch loss 0.011836132034659386
+WARNING: Epoch number 2, batch number 22/40:       batch loss 0.019757051020860672
+WARNING: Epoch number 2, batch number 23/40:       batch loss 0.019343821331858635
+WARNING: Epoch number 2, batch number 24/40:       batch loss 0.017556600272655487
+WARNING: Epoch number 2, batch number 25/40:       batch loss 0.014553503133356571
+WARNING: Epoch number 2, batch number 26/40:       batch loss 0.01655828207731247
+WARNING: Epoch number 2, batch number 27/40:       batch loss 0.020787248387932777
+WARNING: Epoch number 2, batch number 28/40:       batch loss 0.011774051003158092
+WARNING: Epoch number 2, batch number 29/40:       batch loss 0.013056954368948936
+WARNING: Epoch number 2, batch number 30/40:       batch loss 0.02221134677529335
+WARNING: Epoch number 2, batch number 31/40:       batch loss 0.016509857028722763
+WARNING: Epoch number 2, batch number 32/40:       batch loss 0.015286603011190891
+WARNING: Epoch number 2, batch number 33/40:       batch loss 0.011481856927275658
+WARNING: Epoch number 2, batch number 34/40:       batch loss 0.015230047516524792
+WARNING: Epoch number 2, batch number 35/40:       batch loss 0.01657506264746189
+WARNING: Epoch number 2, batch number 36/40:       batch loss 0.015752937644720078
+WARNING: Epoch number 2, batch number 37/40:       batch loss 0.014839966781437397
+WARNING: Epoch number 2, batch number 38/40:       batch loss 0.019004538655281067
+WARNING: Epoch number 2, batch number 39/40:       batch loss 0.020478608086705208
+WARNING: Epoch: 3 	Training Loss: 0.008525
+WARNING: Time for epoch 3 : 1 sec
+WARNING: lr for epoch 3 is 0.10000
+WARNING: Epoch number 2, batch number 0/10:       batch loss 0.01979336328804493
+WARNING: Epoch number 2, batch number 1/10:       batch loss 0.01686718314886093
+WARNING: Epoch number 2, batch number 2/10:       batch loss 0.010012388229370117
+WARNING: Epoch number 2, batch number 3/10:       batch loss 0.01145103108137846
+WARNING: Epoch number 2, batch number 4/10:       batch loss 0.016173958778381348
+WARNING: Epoch number 2, batch number 5/10:       batch loss 0.012360100634396076
+Exception ignored in: <function Image.__del__ at 0x7f28766b2200>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 4056, in __del__
+    self.tk.call('image', 'delete', self.name)
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Variable.__del__ at 0x7f2876a075b0>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 388, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored in: <function Image.__del__ at 0x7f28766b2200>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/tkinter/__init__.py", line 4056, in __del__
+    self.tk.call('image', 'delete', self.name)

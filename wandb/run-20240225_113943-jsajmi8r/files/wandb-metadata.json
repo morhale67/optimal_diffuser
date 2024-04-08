@@ -1,0 +1,357 @@
+{
+    "os": "Linux-5.15.0-1053-aws-x86_64-with-glibc2.31",
+    "python": "3.10.9",
+    "heartbeatAt": "2024-02-25T11:39:44.197938",
+    "startedAt": "2024-02-25T11:39:43.722319",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/ubuntu/Projects/Optimal_Diffuser/main.py",
+    "codePath": "main.py",
+    "git": {
+        "remote": "https://github.com/morhale67/Optimal_Diffuser.git",
+        "commit": "11190f25168c80a5bfcd0be3a6c50de14a2d211d"
+    },
+    "email": null,
+    "root": "/home/ubuntu/Projects/Optimal_Diffuser",
+    "host": "ip-10-0-1-104",
+    "username": "ubuntu",
+    "executable": "/opt/conda/bin/python",
+    "cpu_count": 64,
+    "cpu_count_logical": 64,
+    "cpu_freq": {
+        "current": 2617.125890625001,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3696.183,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2599.998,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 96.86393737792969,
+        "used": 51.18782043457031
+    },
+    "memory": {
+        "total": 246.4007911682129
+    }
+}
