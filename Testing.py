@@ -6,14 +6,13 @@ from LogFunctions import print_and_log_message
 import math
 from OutputHandler import save_orig_img, save_outputs, calc_cumu_ssim_batch, save_randomize_outputs, calc_cumu_psnr_batch
 import numpy as np
-from Training import get_sb_params_batch
+from Training import loss_function
 
 
 def test_net(epoch, network, loader, device, log_path, folder_path, batch_size, img_dim, n_masks,
              wb_flag, save_img=False):
     network.eval()
     network.to(device)
-    criterion = nn.MSELoss()
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(loader.batch_sampler)
     n_samples = n_batchs * batch_size
@@ -24,18 +23,9 @@ def test_net(epoch, network, loader, device, log_path, folder_path, batch_size, 
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
         input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
         diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4 = network(input_sim_object)
-        diffuser = diffuser.reshape(batch_size, n_masks, img_dim)
-        diffuser = diffuser[0]
-        sim_object = sim_object.transpose(1, 2)
-        sim_bucket = torch.matmul(diffuser, sim_object)
-        sim_bucket = torch.transpose(sim_bucket, 1, 2)
 
-        sb_params_batch = get_sb_params_batch(prob_vector1, prob_vector2, prob_vector3, prob_vector4, 0)
-        reconstruct_imgs_batch = breg_rec(diffuser, sim_bucket, batch_size, sb_params_batch).to(device)
-
-        reconstruct_imgs_batch = reconstruct_imgs_batch.to(device)
-        sim_object = torch.squeeze(sim_object)
-        loss = criterion(reconstruct_imgs_batch, sim_object)
+        loss, reconstruct_imgs_batch = loss_function(diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4,
+                                                     sim_object, batch_size, n_masks, img_dim, device)
         cumu_loss += loss.item()
         torch.cuda.empty_cache()  # Before starting a new forward/backward pass
         batch_psnr = calc_cumu_psnr_batch(reconstruct_imgs_batch, sim_object, pic_width)

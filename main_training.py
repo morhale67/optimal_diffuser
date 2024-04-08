@@ -7,7 +7,7 @@ from DataFunctions import build_dataset
 import torch
 from Lasso import sparse_encode
 from Params import get_run_parameters
-from Training import train_epoch
+from Training import train_epoch, train_hard_samples, hard_samples_extractor
 from Testing import test_net
 from LogFunctions import print_and_log_message
 from LogFunctions import print_training_messages
@@ -46,6 +46,11 @@ def train(params, log_path, folder_path, wb_flag):
                                                                      save_img=True)
         numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch, train_psnr_epoch,
                                  test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
+
+    hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['batch_size'],
+                                         params['n_masks'], params['img_dim'], device)
+    numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, log_path, folder_path, wb_flag,
+                       numerical_outputs)
 
     numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
         split_bregman_on_random_for_run(folder_path, params)

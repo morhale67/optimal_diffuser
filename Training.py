@@ -1,13 +1,16 @@
+import time
+
 import numpy as np
 import torch
 from torch import nn
+from torch.utils.data import DataLoader
+
 import wandb
 import math
-import torchvision.datasets as dset
-import torchvision.transforms as tr
-from Model import Gen
 from Model import breg_rec
-from LogFunctions import print_and_log_message
+from LogFunctions import print_and_log_message, print_training_messages
+from Testing import test_net
+from main_training import update_numerical_outputs
 from testers import check_diff
 from testers import compare_buckets
 from Model import Gen_no_batch
@@ -37,7 +40,6 @@ def get_sb_params_batch(prob_vector1, prob_vector2, prob_vector3, prob_vector4, 
 def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks, device, log_path, folder_path,
                 wb_flag, save_img=False):
     network.train()
-    criterion = nn.MSELoss()
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(loader.batch_sampler)
     n_samples = n_batchs * batch_size
@@ -47,17 +49,11 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
         sim_object, _ = sim_bucket_tensor
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
         input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
-        diffuser_o, prob_vector1, prob_vector2, prob_vector3, prob_vector4 = network(input_sim_object)
-        diffuser = diffuser_o.reshape(batch_size, n_masks, img_dim)
-        diffuser = diffuser[0]
-        sim_object = sim_object.transpose(1, 2)
-        sim_bucket = torch.matmul(diffuser, sim_object)
-        sim_bucket = torch.transpose(sim_bucket, 1, 2)
+        diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4 = network(input_sim_object)
 
-        sb_params_batch = get_sb_params_batch(prob_vector1, prob_vector2, prob_vector3, prob_vector4, 0)
-        reconstruct_imgs_batch = breg_rec(diffuser, sim_bucket, batch_size, sb_params_batch).to(device)
-        sim_object = torch.squeeze(sim_object)
-        loss = criterion(reconstruct_imgs_batch, sim_object)
+        loss, reconstruct_imgs_batch = loss_function(diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4,
+                                                     sim_object, batch_size, n_masks, img_dim, device)
+
         optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(network.parameters(), max_norm=1.0)
@@ -65,6 +61,7 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
         optimizer.step()
         cumu_loss += loss.item()
         torch.cuda.empty_cache()
+
         batch_psnr = calc_cumu_psnr_batch(reconstruct_imgs_batch, sim_object, pic_width)
         batch_ssim = calc_cumu_ssim_batch(reconstruct_imgs_batch, sim_object, pic_width)
         cumu_psnr += batch_psnr
@@ -93,13 +90,56 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
     return train_loss, train_psnr, train_ssim
 
 
-def make_masks_from_big_diff(diffuser, ac_stride):
-    """ diffuser shape: [pic_width, diff_width]"""
-    batch_size, pic_width, diff_width = diffuser.shape
-    img_dim = pic_width ** 2
+def loss_function(diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4, sim_object,
+                  batch_size, n_masks, img_dim, device):
+    criterion = nn.MSELoss()
+    diffuser = diffuser.reshape(batch_size, n_masks, img_dim)
+    diffuser = diffuser[0]
+    sim_object = sim_object.transpose(1, 2)
+    sim_bucket = torch.matmul(diffuser, sim_object)
+    sim_bucket = torch.transpose(sim_bucket, 1, 2)
 
-    mask_indices = torch.arange(0, diff_width - pic_width, ac_stride, dtype=torch.long).view(-1, 1)
-    diffuser_expanded = diffuser[:, :, mask_indices + torch.arange(pic_width)]
-    masks = diffuser_expanded.view(batch_size, -1, img_dim)
-    return masks
+    sb_params_batch = get_sb_params_batch(prob_vector1, prob_vector2, prob_vector3, prob_vector4, 0)
+    reconstruct_imgs_batch = breg_rec(diffuser, sim_bucket, batch_size, sb_params_batch).to(device)
+    sim_object = torch.squeeze(sim_object)
+    loss = criterion(reconstruct_imgs_batch, sim_object)
+    return loss, reconstruct_imgs_batch
 
+
+def hard_samples_extractor(trained_network, train_loader, cur_avg_loss, batch_size, n_masks, img_dim, device):
+    pic_width = int(np.sqrt(img_dim))
+    hard_examples = []
+    with torch.no_grad():
+        for sim_object, label in train_loader:
+            sim_object = sim_object.view(-1, 1, img_dim).to(device)
+            input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
+            diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4 = trained_network(input_sim_object)
+            loss = loss_function(diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4, sim_object,
+                                 batch_size, n_masks, img_dim, device)
+            if loss.item() > cur_avg_loss:
+                hard_examples.append((sim_object, label))
+
+    hard_loader = DataLoader(hard_examples, batch_size=train_loader.batch_size, shuffle=True)
+    return hard_loader
+
+
+def train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, log_path, folder_path, wb_flag,
+                       numerical_outputs, num_extra_epochs=10):
+    """Train the model on the hard examples"""
+    for epoch in range(num_extra_epochs):
+        start_epoch = time.time()
+        train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, hard_loader, optimizer,
+                                                                           params['batch_size'], params['img_dim'],
+                                                                           params['n_masks'], device, log_path,
+                                                                           folder_path,
+                                                                           wb_flag, save_img=True)
+        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, log_path)
+        test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, test_loader, device, log_path,
+                                                                     folder_path, params['batch_size'],
+                                                                     params['img_dim'], params['n_masks'], wb_flag,
+                                                                     save_img=True)
+        numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
+                                                     train_psnr_epoch,
+                                                     test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
+
+    return numerical_outputs
