@@ -43,10 +43,12 @@ def make_folder(p):
         folder_name = folder_name + f"_lr_{p['lr']}"
 
     print(folder_name)
-    folder_path = 'Results/' + folder_name
+    folder_path = f"Results/cr_{p['cr']}/" + folder_name
     if os.path.exists(folder_path):
         folder_path = deal_exist_folder(folder_path)
     else:
+        if not os.path.exists(f"Results/cr_{p['cr']}"):
+            os.makedirs(f"Results/cr_{p['cr']}")
         os.makedirs(folder_path)
     return folder_path
 
