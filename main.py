@@ -19,7 +19,8 @@ def main(wb_flag=False):
         wandb.agent(sweep_id, function=main, count=4)
         # p = load_config_parameters(p)
     else:
-        search_parameters(p)
+        spec_multiple_runs(p)
+        # search_parameters(p)
         # run_model(p, False)
 
 
@@ -35,6 +36,38 @@ def search_parameters(p):
                     p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
                     run_model(p, False)
     print('finished successfully')
+
+
+def get_runs():
+    """ cr, lr, weight_decay"""
+    runs = [[1, 10**(-4), 10**(-6)],
+            [1, 10**(-4), 10**(-5)],
+            [1, 10**(-4), 10**(-4)],
+            [1, 10**(-5), 10**(-6)],
+            [1, 10**(-6), 10**(-6)],
+            [2, 10**(-4), 10**(-6)],
+            [2, 10**(-4), 10**(-5)],
+            [2, 10**(-4), 10**(-4)],
+            [5, 10 ** (-4), 10 ** (-6)],
+            [5, 10 ** (-4), 10 ** (-5)],
+            [5, 10 ** (-4), 10 ** (-4)],
+            [10, 10**(-3), 10**(-7)],
+            [10, 10**(-3), 10**(-6)],
+            [10, 10**(-3), 10**(-5)]]
+    return runs
+
+
+def spec_multiple_runs(p):
+    runs = get_runs()
+    n_runs = len(runs)
+    for i, run in enumerate(runs):
+        print(f'Run {i}/{n_runs}')
+        p['cr'] = run[0]
+        p['lr'] = run[1]
+        p['weight_decay'] = run[2]
+        p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
+        run_model(p, False)
+
 
 
 def run_model(p, wb_flag):

@@ -38,19 +38,19 @@ def train(params, log_path, folder_path, wb_flag):
         train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
                                                          params['batch_size'], params['img_dim'],
                                                          params['n_masks'], device, log_path, folder_path,
-                                                         wb_flag, save_img=False)
+                                                         wb_flag, save_img=True)
         print_training_messages(epoch, train_loss_epoch, lr, start_epoch, log_path)
         test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, test_loader, device, log_path,
                                                                      folder_path, params['batch_size'],
                                                                      params['img_dim'], params['n_masks'], wb_flag,
-                                                                     save_img=False)
+                                                                     save_img=True)
         numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch, train_psnr_epoch,
                                  test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
 
     numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
         split_bregman_on_random_for_run(folder_path, params)
     save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag)
-    # sb_reconstraction_for_all_images(folder_path, params['cr'], wb_flag)
+    sb_reconstraction_for_all_images(folder_path, params['cr'], wb_flag)
     print_and_log_message('Run Finished Successfully', log_path)
     #image_results_subplot(folder_path, data_set='train_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])
     #image_results_subplot(folder_path, data_set='test_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])

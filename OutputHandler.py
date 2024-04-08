@@ -38,7 +38,7 @@ def deal_exist_folder(folder_path):
 
 
 def make_folder(p):
-    folder_name = f"{p['model_name']}_TV_beta_{p['TV_beta']}_bs_{p['batch_size']}_cr_{p['cr']}_picw_{p['pic_width']}_wd_{p['weight_decay']}_z_{p['z_dim']}"
+    folder_name = f"{p['model_name']}_cr_{p['cr']}_wd_{p['weight_decay']}"
     if not p['learn_vec_lr']:
         folder_name = folder_name + f"_lr_{p['lr']}"
 
@@ -196,15 +196,15 @@ def subplot_epochs_reconstruction(run_folder_path, data_set, image_folder):
 
 
 def sb_reconstraction_for_all_images(run_folder_path, cr, wb_flag):
-    data_set = 'train_images'
-    folder_path = os.path.join(run_folder_path, data_set)
-    # Get a list of subfolders starting with "image_"
-    images_folders = [subfolder for subfolder in os.listdir(folder_path) if subfolder.startswith("image_")]
-
-    # Iterate through each subfolder and call subplot_images_in_folder
-    for image_folder in images_folders:
-        rec_bregman_for_image(cr, image_folder, data_set, run_folder_path)
-        # subplot_epochs_reconstruction(run_folder_path, data_set, image_folder)
+    # data_set = 'train_images'
+    # folder_path = os.path.join(run_folder_path, data_set)
+    # # Get a list of subfolders starting with "image_"
+    # images_folders = [subfolder for subfolder in os.listdir(folder_path) if subfolder.startswith("image_")]
+    #
+    # # Iterate through each subfolder and call subplot_images_in_folder
+    # for image_folder in images_folders:
+    #     rec_bregman_for_image(cr, image_folder, data_set, run_folder_path)
+    #     # subplot_epochs_reconstruction(run_folder_path, data_set, image_folder)
 
     data_set = 'test_images'
     folder_path = os.path.join(run_folder_path, data_set)

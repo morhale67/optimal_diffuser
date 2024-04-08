@@ -15,7 +15,7 @@ def get_run_parameters():
          'cr': 2,
          'batch_size': 2,
          'lr': 0.001,
-         'epochs': 50,
+         'epochs': 30,
          'optimizer': 'adam',
          'weight_decay': 5e-7,
          # 'big_diffuser': False,
