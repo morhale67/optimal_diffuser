@@ -2,27 +2,7 @@ import pylops
 import torch
 from torch import nn
 import math
-from Lasso import sparse_encode
-from testers import experiment_berg_params
-from testers import plot_rec_image
 import numpy as np
-
-
-def breg_rec(diffuser, bucket_batch, batch_size, sb_params_batch):
-    img_dim = diffuser.shape[1]  # diffuser in shape (n_masks, img_dim)
-    recs_container = torch.zeros(batch_size, img_dim)
-    for rec_ind in range(batch_size):
-        maxiter = 1
-        niter_inner = 1
-        alpha = 1
-        # experiment_berg_params(bucket_batch[rec_ind], diffuser_batch[rec_ind], folder_path='temp/Gan/new')
-        rec = sparse_encode(bucket_batch[rec_ind], diffuser, maxiter=maxiter, niter_inner=niter_inner, alpha=alpha,
-                            algorithm='split-bregman', sb_params_batch=sb_params_batch)
-        # plot_rec_image(rec, maxiter, niter_inner, alpha)
-        recs_container = recs_container.clone()
-        recs_container[rec_ind] = rec
-
-    return recs_container
 
 
 class MyModel(nn.Module):
@@ -77,8 +57,9 @@ class MyModel(nn.Module):
         prob_vector2 = self.prob_vector2(x)
         prob_vector3 = self.prob_vector3(x)
         prob_vector4 = self.prob_vector4(x)
+        prob_vectors = [prob_vector1, prob_vector2, prob_vector3, prob_vector4]
 
-        return diffuser, prob_vector1, prob_vector2, prob_vector3, prob_vector4
+        return diffuser, prob_vectors
 
 
 class Gen_with_p_sb(nn.Module):

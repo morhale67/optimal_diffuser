@@ -19,15 +19,15 @@ def main(wb_flag=False):
         wandb.agent(sweep_id, function=main, count=4)
         # p = load_config_parameters(p)
     else:
-        spec_multiple_runs(p)
+        # spec_multiple_runs(p)
         # search_parameters(p)
-        # run_model(p, False)
+        run_model(p, False)
 
 
 def search_parameters(p):
     for lr in [0.001, 0.0001, 0.00001]:
         p['lr'] = lr
-        for bs in [2, 4, 8]:
+        for bs in [8, 10, 15, 20, 25]:
             p['batch_size'] = bs
             for weight_decay in [1e-7, 5e-7, 10e-7]:
                 p['weight_decay'] = weight_decay
