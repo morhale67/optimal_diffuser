@@ -2,3 +2,6 @@ temp/
 algorithms_exp/
 data/cifar10
 Results/
+/analysis_TV_Or.py
+temp.py
+analysis_TV_Or.py
