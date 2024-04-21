@@ -1,3 +1,5 @@
+import os
+
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -22,7 +24,7 @@ from testers import check_diff, compare_buckets, check_diff_ac
 from OutputHandler import save_outputs, calc_cumu_ssim_batch, save_randomize_outputs, calc_cumu_psnr_batch
 
 
-def train(params, log_path, folder_path, wb_flag):
+def train(params, logs, folder_path, writers, wb_flag=False):
     train_loader, test_loader = build_dataset(params['batch_size'], params['num_workers'], params['pic_width'],
                                               params['n_samples'], params['data_medical'], params['data_name'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -33,31 +35,31 @@ def train(params, log_path, folder_path, wb_flag):
     save_orig_img(train_loader, folder_path, name_sub_folder='train_images')
     save_orig_img(test_loader, folder_path, name_sub_folder='test_images')
 
-    # for epoch in range(params['epochs']):
-    #     if params['learn_vec_lr']:
-    #         lr = get_lr(epoch, params['lr_vec'], params['cum_epochs'])
-    #         optimizer = build_optimizer(network, params['optimizer'], lr, params['weight_decay'])
-    #     start_epoch = time.time()
-    #     train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
-    #                                                      params['batch_size'], params['img_dim'],
-    #                                                      params['n_masks'], device, log_path, folder_path,
-    #                                                      wb_flag, save_img=True)
-    #     print_training_messages(epoch, train_loss_epoch, lr, start_epoch, log_path)
-    #     test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, train_loader, test_loader, device, log_path,
-    #                                                                  folder_path, params['img_dim'], params['n_masks'],
-    #                                                                  wb_flag, save_img=True)
-    #     numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch, train_psnr_epoch,
-    #                              test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
-    train_loss_epoch = 1
-    hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'], device)
-    numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, log_path,
-                                           folder_path, wb_flag, numerical_outputs)
+    for epoch in range(params['epochs']):
+        if params['learn_vec_lr']:
+            lr = get_lr(epoch, params['lr_vec'], params['cum_epochs'])
+            optimizer = build_optimizer(network, params['optimizer'], lr, params['weight_decay'])
+        start_epoch = time.time()
+        train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
+                                                         params['batch_size'], params['img_dim'],
+                                                         params['n_masks'], device, logs, folder_path,
+                                                         writers, save_img=True)
+        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
+        test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, train_loader, test_loader, device,
+                                                                     logs, folder_path, params['img_dim'],
+                                                                     params['n_masks'], writers, save_img=True)
+        numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
+                                                     train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
+    hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
+                                         device)
+    numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs,
+                                           folder_path, writers, numerical_outputs)
 
     numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
         split_bregman_on_random_for_run(folder_path, params)
     save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag)
     sb_reconstraction_for_all_images(folder_path, params['cr'], wb_flag)
-    print_and_log_message('Run Finished Successfully', log_path)
+    print_and_log_message('Run Finished Successfully', logs[0])
     #image_results_subplot(folder_path, data_set='train_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])
     #image_results_subplot(folder_path, data_set='test_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])
 
@@ -156,31 +158,53 @@ def hard_samples_extractor(trained_network, train_loader, cur_avg_loss, n_masks,
             if loss.item() > cur_avg_loss:
                 hard_examples.append((sim_object, label))
 
-    hard_loader = DataLoader(hard_examples, batch_size=train_loader.batch_size, shuffle=True)
+    if len(hard_examples) > 0:
+        hard_loader = DataLoader(hard_examples, batch_size=train_loader.batch_size, shuffle=True)
+    else:
+        hard_loader = False
     return hard_loader
 
 
-def train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, log_path, folder_path, wb_flag,
-                       numerical_outputs, num_extra_epochs=10):
+def train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs, folder_path, writers,
+                       numerical_outputs, num_extra_epochs=10, wb_flag=False):
     """Train the model on the hard examples"""
     for epoch in range(num_extra_epochs):
         start_epoch = time.time()
         train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, hard_loader, optimizer,
                                                                            params['batch_size'], params['img_dim'],
                                                                            params['n_masks'], device,
-                                                                           log_path, folder_path, wb_flag, save_img=True)
-        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, log_path)
-        test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, hard_loader, test_loader, device, log_path,
-                                                                     folder_path, params['img_dim'], params['n_masks'],
-                                                                     wb_flag, save_img=True)
+                                                                           logs, folder_path, writers, save_img=True)
+        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
+        test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, hard_loader, test_loader, device,
+                                                                     logs, folder_path, params['img_dim'],
+                                                                     params['n_masks'], writers, save_img=True,
+                                                                     wb_flag=False)
         numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
-                                                     train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
+                                                     train_psnr_epoch, test_psnr_epoch, train_ssim_epoch,
+                                                     test_ssim_epoch)
 
     return numerical_outputs
 
 
-def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks, device, log_path, folder_path,
-                wb_flag, save_img=False):
+def log_tb_batch_info(writers, logs, loss, batch_psnr, batch_ssim, step):
+    log_tb = logs[1]
+    log_cr = logs[2]
+    writer_cr = writers[0]
+    writer_run = writers[1]
+    run_name = os.path.basename(log_tb)
+    writer_run.add_scalar('Train_Loss', loss, step)
+    writer_run.add_scalar('Train_PSNR', batch_psnr, step)
+    writer_run.add_scalar('Train_SSIM', batch_ssim, step)  # tag=run_name
+
+    writer_cr.add_scalar(os.path.join(run_name, 'Loss'), loss, step)  # tag='train_loss'
+    writer_cr.add_scalar(os.path.join(run_name, 'PSNR'), batch_psnr, step)  # tag='train_psnr'
+    writer_cr.add_scalar(os.path.join(run_name, 'SSIM'), batch_ssim, step)  # tag='train_ssim'
+    writers = [writer_cr, writer_run]
+    return writers
+
+
+def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks, device, logs, folder_path,
+                writers, save_img=False, wb_flag=False):
     network.train()
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(loader.batch_sampler)
@@ -208,7 +232,9 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
         cumu_psnr += batch_psnr
         cumu_ssim += batch_ssim
         print_and_log_message(f"Epoch number {epoch}, batch number {batch_index}/{n_batchs}:"
-                              f"       batch loss {loss.item()}", log_path)
+                              f"       batch loss {loss.item()}", logs[0])
+        step = epoch * batch_size + batch_index
+        writers = log_tb_batch_info(writers, logs, loss, batch_psnr, batch_ssim, step)
         if wb_flag:
             wandb.log({"Loss Batch": loss.item(), "PSNR Batch": batch_psnr/batch_size,
                        "SSIM Batch": batch_ssim/batch_size})

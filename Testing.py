@@ -1,3 +1,5 @@
+import os
+
 import torch
 from torch import nn
 import wandb
@@ -47,8 +49,26 @@ def creat_diffuser_for_batch(trained_network, train_loader, img_dim, device):
     return diffuser_batch, sb_params_batch
 
 
-def test_diffuser(epoch, diffuser, sb_params, test_loader, device, log_path, folder_path, img_dim, n_masks, wb_flag,
-                  save_img):
+def log_tb_epoch_info(writers, logs, loss, batch_psnr, batch_ssim, step):
+    log_tb = logs[1]
+    log_cr = logs[2]
+    writer_cr = writers[0]
+    writer_run = writers[1]
+    run_name = os.path.basename(log_tb)
+    writer_run.add_scalar('Test_Loss', loss, global_step=step)
+    writer_run.add_scalar('Test_PSNR', batch_psnr, global_step=step)
+    writer_run.add_scalar('Test_SSIM', batch_ssim, global_step=step)
+
+    writer_cr.add_scalar(os.path.join(run_name, 'Loss'), loss)
+    writer_cr.add_scalar(os.path.join(run_name, 'PSNR'), batch_psnr)
+    writer_cr.add_scalar(os.path.join(run_name, 'SSIM'), batch_ssim)
+    writers = [writer_cr, writer_run]
+
+    return writers
+
+
+def test_diffuser(epoch, diffuser, sb_params, test_loader, device, logs, folder_path, img_dim, n_masks, writers,
+                  save_img, wb_flag=False):
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(test_loader.batch_sampler)
     batch_size = test_loader.batch_size
@@ -66,7 +86,7 @@ def test_diffuser(epoch, diffuser, sb_params, test_loader, device, log_path, fol
         cumu_psnr += batch_psnr
         cumu_ssim += batch_ssim
         print_and_log_message(f"Epoch number {epoch}, batch number {batch_index}/{n_batchs}:"
-                              f"       batch loss {loss.item()}", log_path)
+                              f"       batch loss {loss.item()}", logs[0])
         if wb_flag:
             wandb.log({"test_loss_batch": loss.item(), "test_psnr_batch": batch_psnr / batch_size,
                        "test_ssim_batch": batch_ssim / batch_size, "test_batch_index": batch_index})
@@ -75,6 +95,7 @@ def test_diffuser(epoch, diffuser, sb_params, test_loader, device, log_path, fol
                                    folder_path, 'test_images', wb_flag)
 
     test_loss, test_psnr, test_ssim = cumu_loss / n_samples, cumu_psnr / n_samples, cumu_ssim / n_samples
+    writers = log_tb_epoch_info(writers, logs[1], test_loss, test_psnr, test_ssim, step=(epoch+1)*batch_size)
 
     if wb_flag:
         wandb.log({"epoch": epoch, 'test_loss': test_loss})

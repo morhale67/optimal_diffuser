@@ -1,6 +1,14 @@
 import logging
+import os
 import time
 from datetime import datetime
+
+
+def generate_log_tensorborad(model_name, cr_name, run_name):
+    logs_base_dir = os.path.join('logs', 'models')
+    log_tb = os.path.join(logs_base_dir, model_name, f'cr_{cr_name}', run_name)
+    log_cr = os.path.join(logs_base_dir, model_name, cr_name)
+    return log_tb, log_cr
 
 
 def print_run_info_to_log(p, folder_path='Logs/'):
@@ -36,7 +44,10 @@ def print_run_info_to_log(p, folder_path='Logs/'):
 
     # logger.info(f'number of fully connected layers in model: {p["n_fc"]}')
     logger.info('***************************************************************************\n\n')
-    return log_path
+    run_name = f"wd_{p['weight_decay']}_lr_{p['lr']}"
+    log_tb, log_cr = generate_log_tensorborad(p['model_name'], str(p['cr']), run_name)
+    logs = [log_path, log_tb, log_cr]
+    return logs, run_name
 
 
 def print_and_log_message(message, log_path):

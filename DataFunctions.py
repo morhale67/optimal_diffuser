@@ -53,7 +53,7 @@ def create_loader_from_data_set(data_set, n_samples, batch_size, num_workers, te
 
     train_loader = DataLoader(data_set, batch_size=batch_size, num_workers=num_workers, sampler=train_sampler,
                               shuffle=False)
-    test_loader = DataLoader(data_set, batch_size=len(test_indices), num_workers=num_workers, sampler=test_sampler, shuffle=False)
+    test_loader = DataLoader(data_set, batch_size=batch_size, num_workers=num_workers, sampler=test_sampler, shuffle=False)
     return train_loader, test_loader
 
 
