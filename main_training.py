@@ -52,7 +52,8 @@ def train(params, logs, folder_path, writers, wb_flag=False):
                                                      train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
     hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
                                          device)
-    numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs,
+    if len(hard_loader) == 0:
+        numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs,
                                            folder_path, writers, numerical_outputs)
 
     numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
