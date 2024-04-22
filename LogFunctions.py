@@ -17,6 +17,9 @@ def print_run_info_to_log(p, folder_path='Logs/'):
     log_name = f"Log_{dt_string}.log"
     print(f'Name of log file: {log_name}')
     log_path = folder_path + '/' + log_name
+
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
     logging.basicConfig(filename=log_path, format='%(asctime)s %(message)s', filemode='w')
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
@@ -44,7 +47,7 @@ def print_run_info_to_log(p, folder_path='Logs/'):
 
     # logger.info(f'number of fully connected layers in model: {p["n_fc"]}')
     logger.info('***************************************************************************\n\n')
-    run_name = f"wd_{p['weight_decay']}_lr_{p['lr']}"
+    run_name = f"bs_{p['batch_size']}wd_{p['weight_decay']}_lr_{p['lr']}"
     log_tb, log_cr = generate_log_tensorborad(p['model_name'], str(p['cr']), run_name)
     logs = [log_path, log_tb, log_cr]
     return logs, run_name

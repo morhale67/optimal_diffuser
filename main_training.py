@@ -44,10 +44,10 @@ def train(params, logs, folder_path, writers, wb_flag=False):
                                                          params['batch_size'], params['img_dim'],
                                                          params['n_masks'], device, logs, folder_path,
                                                          writers, save_img=True)
-        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
         test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, train_loader, test_loader, device,
                                                                      logs, folder_path, params['img_dim'],
                                                                      params['n_masks'], writers, save_img=True)
+        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
         numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
                                                      train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
     hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
