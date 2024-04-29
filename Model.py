@@ -74,10 +74,13 @@ class ResConv(nn.Module):
 
     def forward(self, x_i):
         x = self.conv1(x_i)
+        print(x.shape)
         x = self.res1(x)
+        print(x.shape)
         x = self.res2(x)
+        print(x.shape)
         x = self.res3(x)
-
+        print(x.shape)
         x = torch.flatten(x, 1)
         print(x.shape)
         x = self.fc1(x)
