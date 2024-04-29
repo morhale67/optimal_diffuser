@@ -66,7 +66,7 @@ class ResConv(nn.Module):
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 128)
 
-        self.fc_diff = nn.Linear(256, n_masks * img_dim)
+        self.fc_diff = nn.Linear(128, n_masks * img_dim)
         self.prob_vector1 = nn.Linear(128, 10)
         self.prob_vector2 = nn.Linear(128, 10)
         self.prob_vector3 = nn.Linear(128, 10)
