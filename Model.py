@@ -79,7 +79,7 @@ class ResConv(nn.Module):
         x = self.res3(x)
 
         x = torch.flatten(x, 1)
-
+        print(x.shape)
         x = self.fc1(x)
         x = torch.relu(x)
         x = self.fc2(x)
