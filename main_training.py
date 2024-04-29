@@ -60,8 +60,8 @@ def train(params, logs, folder_path, writers, wb_flag=False):
     # numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
     #     split_bregman_on_random_for_run(folder_path, params)
     save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag)
-    sb_reconstraction_for_all_images(folder_path, params['cr'], wb_flag)
     print_and_log_message('Run Finished Successfully', logs[0])
+    # sb_reconstraction_for_all_images(folder_path, params['cr'], wb_flag)
     #image_results_subplot(folder_path, data_set='train_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])
     #image_results_subplot(folder_path, data_set='test_images', epochs_to_show=[0, 1, 2, 5, 10, params['epochs']])
 
