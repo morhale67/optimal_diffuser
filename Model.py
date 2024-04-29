@@ -43,10 +43,10 @@ class ResidualBlock(nn.Module):
         out = self.relu(out)
         out = self.conv2(out)
         out = self.bn2(out)
-        print(out.shape)
-        print(identity.shape)
         if self.downsample is not None:
             identity = self.downsample(x)
+        print(out.shape)
+        print(identity.shape)
         out += identity
         out = self.relu(out)
         return out
