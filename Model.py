@@ -60,7 +60,7 @@ class ResConv(nn.Module):
         self.res2 = ResidualBlock(64, 128)
         self.res3 = ResidualBlock(128, 256)
 
-        fc_input_size = 256 * (pic_width // 16) * (pic_width // 16)
+        fc_input_size = 256 * (pic_width // 2) * (pic_width // 2)
 
         self.fc1 = nn.Linear(fc_input_size, 512)
         self.fc2 = nn.Linear(512, 256)
