@@ -45,11 +45,10 @@ class ResidualBlock(nn.Module):
         out = self.bn2(out)
         if self.downsample is not None:
             identity = self.downsample(x)
-        print(out.shape)
-        print(identity.shape)
         out += identity
         out = self.relu(out)
         return out
+
 
 class ResConv(nn.Module):
     def __init__(self, img_dim, n_masks):
@@ -75,9 +74,9 @@ class ResConv(nn.Module):
 
     def forward(self, x_i):
         x = self.conv1(x_i)
-        x = self.res1(x) + x
-        x = self.res2(x) + x
-        x = self.res3(x) + x
+        x = self.res1(x)
+        x = self.res2(x)
+        x = self.res3(x)
 
         x = torch.flatten(x, 1)
 
