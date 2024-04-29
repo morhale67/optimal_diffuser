@@ -12,7 +12,7 @@ import os
 from torch.utils.data import Subset, DataLoader
 
 
-def build_dataset(batch_size, num_workers, pic_width, n_samples, data_root_medical, data_name):
+def build_dataset(batch_size, num_workers, pic_width, n_samples, data_name, data_root_medical=''):
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Resize((pic_width, pic_width)),

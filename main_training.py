@@ -26,7 +26,7 @@ from OutputHandler import save_outputs, calc_cumu_ssim_batch, save_randomize_out
 
 def train(params, logs, folder_path, writers, wb_flag=False):
     train_loader, test_loader = build_dataset(params['batch_size'], params['num_workers'], params['pic_width'],
-                                              params['n_samples'], params['data_medical'], params['data_name'])
+                                              params['n_samples'], params['data_name'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     network = build_network(params['img_dim'], params['n_masks'], device, params['model_name'])
     optimizer = build_optimizer(network, params['optimizer'], params['lr'], params['weight_decay'])
