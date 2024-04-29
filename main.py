@@ -27,9 +27,7 @@ def search_parameters(p):
                 for cr in [1, 2, 5, 10]:
                     p['cr'] = cr
                     p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-                    folder_path, log_path = run_model(p)
-                    loss, psnr, ssim = split_bregman_on_random_for_run(folder_path, p)
-                    print_and_log_message(f'SB default and random masks - loss: {loss}, psnr: {psnr}, ssim: {ssim}', log_path)
+                    run_model(p)
 
     print('finished successfully')
 
@@ -75,6 +73,8 @@ def run_model(p):
         print(f'run_name is {run_name}')
         writers = [writer_cr, writer_run]
         train(p, logs, folder_path, writers)
+        loss, psnr, ssim = split_bregman_on_random_for_run(folder_path, p)
+        print_and_log_message(f'SB default and random masks - loss: {loss}, psnr: {psnr}, ssim: {ssim}', logs[0])
     except Exception as e:
         trace_output = StringIO()
         traceback.print_exc(file=trace_output)
@@ -83,7 +83,7 @@ def run_model(p):
         print_and_log_message(error_message1, logs[0])
         print_and_log_message(error_message2, logs[0])
         print_and_log_message(folder_path, logs[0])
-    return folder_path, logs[0]
+
 
 if __name__ == '__main__':
     main()
