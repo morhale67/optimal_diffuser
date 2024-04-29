@@ -55,7 +55,7 @@ class ResidualBlock(nn.Module):
 
 class ResConv(nn.Module):
     def __init__(self, img_dim, n_masks):
-        super(MyModel, self).__init__()
+        super(ResConv, self).__init__()
         pic_width = int(np.sqrt(img_dim))
 
         self.conv1 = ConvBlock(1, 32)

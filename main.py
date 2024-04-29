@@ -1,6 +1,6 @@
 import math
 import wandb
-from main_training import train
+from main_training import train, split_bregman_on_random_for_run
 from Params import get_run_parameters
 from LogFunctions import print_and_log_message
 from LogFunctions import print_run_info_to_log
@@ -28,7 +28,10 @@ def search_parameters(p):
                 for cr in [1, 2, 5, 10]:
                     p['cr'] = cr
                     p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-                    run_model(p)
+                    folder_path, log_path = run_model(p)
+                    loss, psnr, ssim = split_bregman_on_random_for_run(folder_path, p)
+                    print_and_log_message(f'SB default and random masks - loss: {loss}, psnr: {psnr}, ssim: {ssim}', log_path)
+
     print('finished successfully')
 
 
@@ -81,8 +84,7 @@ def run_model(p):
         print_and_log_message(error_message1, logs[0])
         print_and_log_message(error_message2, logs[0])
         print_and_log_message(folder_path, logs[0])
-
-
+    return folder_path, logs[0]
 
 if __name__ == '__main__':
     main()
