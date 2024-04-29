@@ -1,0 +1,448 @@
+2024-04-25 17:54:42,753 This is a summery of the run:
+2024-04-25 17:54:42,753 Batch size for this run: 15
+2024-04-25 17:54:42,753 Size of original image: 32 X 32
+2024-04-25 17:54:42,753 number of masks: 102
+2024-04-25 17:54:42,753 Compression ratio: 10
+2024-04-25 17:54:42,753 epochs : 40
+2024-04-25 17:54:42,753 one learning rate: 0.01
+2024-04-25 17:54:42,753 optimizer: adam
+2024-04-25 17:54:42,753 weight_decay: 0.001
+2024-04-25 17:54:42,753 ***************************************************************************
+
+
+2024-04-25 17:54:42,753 learning rate: 0.01
+2024-04-25 17:54:45,701 Epoch number 0, batch number 0/5:       batch loss 0.04900496453046799
+2024-04-25 17:54:49,642 Epoch number 0, batch number 1/5:       batch loss 1.9071533679962158
+2024-04-25 17:54:52,037 Epoch number 0, batch number 2/5:       batch loss 1.5922725200653076
+2024-04-25 17:54:55,500 Epoch number 0, batch number 3/5:       batch loss 1.6530921459197998
+2024-04-25 17:54:58,970 Epoch number 0, batch number 4/5:       batch loss 1.7778396606445312
+2024-04-25 17:55:01,547 Epoch number 0, batch number 0/1:       batch loss 1.5145307779312134
+2024-04-25 17:55:01,669 Epoch: 1 	Training Loss: 0.093058
+2024-04-25 17:55:01,669 Time for epoch 1 : 18 sec
+2024-04-25 17:55:01,669 lr for epoch 1 is 0.01000
+2024-04-25 17:55:07,003 Epoch number 1, batch number 0/5:       batch loss 1.5751900672912598
+2024-04-25 17:55:08,194 Epoch number 1, batch number 1/5:       batch loss 0.6857724785804749
+2024-04-25 17:55:09,176 Epoch number 1, batch number 2/5:       batch loss 0.5783442258834839
+2024-04-25 17:55:10,075 Epoch number 1, batch number 3/5:       batch loss 0.5739966630935669
+2024-04-25 17:55:10,974 Epoch number 1, batch number 4/5:       batch loss 0.5652457475662231
+2024-04-25 17:55:12,904 Epoch number 1, batch number 0/1:       batch loss 0.5114696025848389
+2024-04-25 17:55:13,010 Epoch: 2 	Training Loss: 0.053047
+2024-04-25 17:55:13,010 Time for epoch 2 : 11 sec
+2024-04-25 17:55:13,010 lr for epoch 2 is 0.01000
+2024-04-25 17:55:15,335 Epoch number 2, batch number 0/5:       batch loss 0.501316487789154
+2024-04-25 17:55:16,489 Epoch number 2, batch number 1/5:       batch loss 0.5546360015869141
+2024-04-25 17:55:17,421 Epoch number 2, batch number 2/5:       batch loss 0.4862733781337738
+2024-04-25 17:55:18,337 Epoch number 2, batch number 3/5:       batch loss 0.4602191150188446
+2024-04-25 17:55:19,228 Epoch number 2, batch number 4/5:       batch loss 0.417084664106369
+2024-04-25 17:55:21,127 Epoch number 2, batch number 0/1:       batch loss 0.3898864686489105
+2024-04-25 17:55:21,277 Epoch: 3 	Training Loss: 0.032260
+2024-04-25 17:55:21,277 Time for epoch 3 : 8 sec
+2024-04-25 17:55:21,279 lr for epoch 3 is 0.01000
+2024-04-25 17:55:23,541 Epoch number 3, batch number 0/5:       batch loss 0.4072282612323761
+2024-04-25 17:55:25,449 Epoch number 3, batch number 1/5:       batch loss 0.8054301738739014
+2024-04-25 17:55:27,116 Epoch number 3, batch number 2/5:       batch loss 0.6942828297615051
+2024-04-25 17:55:28,801 Epoch number 3, batch number 3/5:       batch loss 0.7906618714332581
+2024-04-25 17:55:30,383 Epoch number 3, batch number 4/5:       batch loss 0.8590971827507019
+2024-04-25 17:55:32,398 Epoch number 3, batch number 0/1:       batch loss 0.8610830903053284
+2024-04-25 17:55:32,523 Epoch: 4 	Training Loss: 0.047423
+2024-04-25 17:55:32,523 Time for epoch 4 : 11 sec
+2024-04-25 17:55:32,523 lr for epoch 4 is 0.01000
+2024-04-25 17:55:35,567 Epoch number 4, batch number 0/5:       batch loss 0.8446769714355469
+2024-04-25 17:55:37,425 Epoch number 4, batch number 1/5:       batch loss 0.8060417175292969
+2024-04-25 17:55:40,991 Epoch number 4, batch number 2/5:       batch loss 1.3929252624511719
+2024-04-25 17:55:44,501 Epoch number 4, batch number 3/5:       batch loss 1.5848101377487183
+2024-04-25 17:55:47,857 Epoch number 4, batch number 4/5:       batch loss 1.5593183040618896
+2024-04-25 17:55:50,411 Epoch number 4, batch number 0/1:       batch loss 1.4769586324691772
+2024-04-25 17:55:50,561 Epoch: 5 	Training Loss: 0.082504
+2024-04-25 17:55:50,562 Time for epoch 5 : 18 sec
+2024-04-25 17:55:50,562 lr for epoch 5 is 0.01000
+2024-04-25 17:55:55,735 Epoch number 5, batch number 0/5:       batch loss 1.3906608819961548
+2024-04-25 17:55:59,527 Epoch number 5, batch number 1/5:       batch loss 1.5521924495697021
+2024-04-25 17:56:02,974 Epoch number 5, batch number 2/5:       batch loss 1.5709048509597778
+2024-04-25 17:56:06,482 Epoch number 5, batch number 3/5:       batch loss 1.358486533164978
+2024-04-25 17:56:09,868 Epoch number 5, batch number 4/5:       batch loss 1.4854012727737427
+2024-04-25 17:56:12,375 Epoch number 5, batch number 0/1:       batch loss 1.2340339422225952
+2024-04-25 17:56:12,488 Epoch: 6 	Training Loss: 0.098102
+2024-04-25 17:56:12,488 Time for epoch 6 : 22 sec
+2024-04-25 17:56:12,488 lr for epoch 6 is 0.01000
+2024-04-25 17:56:17,579 Epoch number 6, batch number 0/5:       batch loss 1.2524921894073486
+2024-04-25 17:56:18,944 Epoch number 6, batch number 1/5:       batch loss 0.4277760088443756
+2024-04-25 17:56:20,057 Epoch number 6, batch number 2/5:       batch loss 0.33312204480171204
+2024-04-25 17:56:21,151 Epoch number 6, batch number 3/5:       batch loss 0.2622211277484894
+2024-04-25 17:56:22,256 Epoch number 6, batch number 4/5:       batch loss 0.26762259006500244
+2024-04-25 17:56:24,145 Epoch number 6, batch number 0/1:       batch loss 0.2626864016056061
+2024-04-25 17:56:24,283 Epoch: 7 	Training Loss: 0.033910
+2024-04-25 17:56:24,283 Time for epoch 7 : 12 sec
+2024-04-25 17:56:24,283 lr for epoch 7 is 0.01000
+2024-04-25 17:56:26,833 Epoch number 7, batch number 0/5:       batch loss 0.24025453627109528
+2024-04-25 17:56:28,184 Epoch number 7, batch number 1/5:       batch loss 0.2713848650455475
+2024-04-25 17:56:29,287 Epoch number 7, batch number 2/5:       batch loss 0.26306745409965515
+2024-04-25 17:56:30,382 Epoch number 7, batch number 3/5:       batch loss 0.20404596626758575
+2024-04-25 17:56:31,481 Epoch number 7, batch number 4/5:       batch loss 0.19489656388759613
+2024-04-25 17:56:33,483 Epoch number 7, batch number 0/1:       batch loss 0.1854570358991623
+2024-04-25 17:56:33,596 Epoch: 8 	Training Loss: 0.015649
+2024-04-25 17:56:33,596 Time for epoch 8 : 9 sec
+2024-04-25 17:56:33,596 lr for epoch 8 is 0.01000
+2024-04-25 17:56:36,219 Epoch number 8, batch number 0/5:       batch loss 0.18246646225452423
+2024-04-25 17:56:37,572 Epoch number 8, batch number 1/5:       batch loss 0.20037293434143066
+2024-04-25 17:56:38,736 Epoch number 8, batch number 2/5:       batch loss 0.1747027486562729
+2024-04-25 17:56:39,845 Epoch number 8, batch number 3/5:       batch loss 0.15016405284404755
+2024-04-25 17:56:40,947 Epoch number 8, batch number 4/5:       batch loss 0.13650883734226227
+2024-04-25 17:56:43,397 Epoch number 8, batch number 0/1:       batch loss 1.139165997505188
+2024-04-25 17:56:43,543 Epoch: 9 	Training Loss: 0.011256
+2024-04-25 17:56:43,543 Time for epoch 9 : 10 sec
+2024-04-25 17:56:43,543 lr for epoch 9 is 0.01000
+2024-04-25 17:56:48,586 Epoch number 9, batch number 0/5:       batch loss 1.1514097452163696
+2024-04-25 17:56:52,689 Epoch number 9, batch number 1/5:       batch loss 1.483002781867981
+2024-04-25 17:56:56,046 Epoch number 9, batch number 2/5:       batch loss 1.744264841079712
+2024-04-25 17:56:59,397 Epoch number 9, batch number 3/5:       batch loss 1.8231908082962036
+2024-04-25 17:57:02,760 Epoch number 9, batch number 4/5:       batch loss 1.752234935760498
+2024-04-25 17:57:05,292 Epoch number 9, batch number 0/1:       batch loss 2.2470059394836426
+2024-04-25 17:57:05,431 Epoch: 10 	Training Loss: 0.106055
+2024-04-25 17:57:05,431 Time for epoch 10 : 22 sec
+2024-04-25 17:57:05,431 lr for epoch 10 is 0.01000
+2024-04-25 17:57:10,521 Epoch number 10, batch number 0/5:       batch loss 2.253335475921631
+2024-04-25 17:57:14,327 Epoch number 10, batch number 1/5:       batch loss 2.2284224033355713
+2024-04-25 17:57:17,776 Epoch number 10, batch number 2/5:       batch loss 1.9721083641052246
+2024-04-25 17:57:21,193 Epoch number 10, batch number 3/5:       batch loss 1.91001558303833
+2024-04-25 17:57:24,581 Epoch number 10, batch number 4/5:       batch loss 1.7256568670272827
+2024-04-25 17:57:27,121 Epoch number 10, batch number 0/1:       batch loss 1.7876169681549072
+2024-04-25 17:57:27,277 Epoch: 11 	Training Loss: 0.134527
+2024-04-25 17:57:27,277 Time for epoch 11 : 22 sec
+2024-04-25 17:57:27,277 lr for epoch 11 is 0.01000
+2024-04-25 17:57:32,312 Epoch number 11, batch number 0/5:       batch loss 1.7902138233184814
+2024-04-25 17:57:36,118 Epoch number 11, batch number 1/5:       batch loss 1.4418795108795166
+2024-04-25 17:57:37,763 Epoch number 11, batch number 2/5:       batch loss 1.0405826568603516
+2024-04-25 17:57:39,377 Epoch number 11, batch number 3/5:       batch loss 0.8753767609596252
+2024-04-25 17:57:40,962 Epoch number 11, batch number 4/5:       batch loss 0.8124852776527405
+2024-04-25 17:57:43,155 Epoch number 11, batch number 0/1:       batch loss 0.707012414932251
+2024-04-25 17:57:43,287 Epoch: 12 	Training Loss: 0.079474
+2024-04-25 17:57:43,288 Time for epoch 12 : 16 sec
+2024-04-25 17:57:43,288 lr for epoch 12 is 0.01000
+2024-04-25 17:57:46,423 Epoch number 12, batch number 0/5:       batch loss 0.6933434009552002
+2024-04-25 17:57:48,809 Epoch number 12, batch number 1/5:       batch loss 0.7131679058074951
+2024-04-25 17:57:51,032 Epoch number 12, batch number 2/5:       batch loss 0.6997296810150146
+2024-04-25 17:57:53,148 Epoch number 12, batch number 3/5:       batch loss 0.6927783489227295
+2024-04-25 17:57:55,280 Epoch number 12, batch number 4/5:       batch loss 0.5955706238746643
+2024-04-25 17:57:57,886 Epoch number 12, batch number 0/1:       batch loss 0.9192599654197693
+2024-04-25 17:57:58,046 Epoch: 13 	Training Loss: 0.045261
+2024-04-25 17:57:58,046 Time for epoch 13 : 15 sec
+2024-04-25 17:57:58,046 lr for epoch 13 is 0.01000
+2024-04-25 17:58:03,711 Epoch number 13, batch number 0/5:       batch loss 0.9372743964195251
+2024-04-25 17:58:05,628 Epoch number 13, batch number 1/5:       batch loss 0.6568005681037903
+2024-04-25 17:58:07,244 Epoch number 13, batch number 2/5:       batch loss 0.5147735476493835
+2024-04-25 17:58:08,856 Epoch number 13, batch number 3/5:       batch loss 0.5867272615432739
+2024-04-25 17:58:10,445 Epoch number 13, batch number 4/5:       batch loss 0.6161653399467468
+2024-04-25 17:58:12,542 Epoch number 13, batch number 0/1:       batch loss 0.5750635266304016
+2024-04-25 17:58:12,678 Epoch: 14 	Training Loss: 0.044157
+2024-04-25 17:58:12,679 Time for epoch 14 : 15 sec
+2024-04-25 17:58:12,679 lr for epoch 14 is 0.01000
+2024-04-25 17:58:15,840 Epoch number 14, batch number 0/5:       batch loss 0.5823864340782166
+2024-04-25 17:58:17,719 Epoch number 14, batch number 1/5:       batch loss 0.6260390877723694
+2024-04-25 17:58:19,333 Epoch number 14, batch number 2/5:       batch loss 0.4929518699645996
+2024-04-25 17:58:20,925 Epoch number 14, batch number 3/5:       batch loss 0.561844527721405
+2024-04-25 17:58:22,520 Epoch number 14, batch number 4/5:       batch loss 0.6215512752532959
+2024-04-25 17:58:24,644 Epoch number 14, batch number 0/1:       batch loss 3.2405927181243896
+2024-04-25 17:58:24,777 Epoch: 15 	Training Loss: 0.038464
+2024-04-25 17:58:24,778 Time for epoch 15 : 12 sec
+2024-04-25 17:58:24,778 lr for epoch 15 is 0.01000
+2024-04-25 17:58:27,912 Epoch number 15, batch number 0/5:       batch loss 3.0328190326690674
+2024-04-25 17:58:29,844 Epoch number 15, batch number 1/5:       batch loss 3.4895780086517334
+2024-04-25 17:58:31,579 Epoch number 15, batch number 2/5:       batch loss 0.8563281893730164
+2024-04-25 17:58:35,563 Epoch number 15, batch number 3/5:       batch loss 1.2616565227508545
+2024-04-25 17:58:39,466 Epoch number 15, batch number 4/5:       batch loss 1.1507524251937866
+2024-04-25 17:58:41,657 Epoch number 15, batch number 0/1:       batch loss 0.9139754772186279
+2024-04-25 17:58:41,789 Epoch: 16 	Training Loss: 0.130548
+2024-04-25 17:58:41,789 Time for epoch 16 : 17 sec
+2024-04-25 17:58:41,790 lr for epoch 16 is 0.01000
+2024-04-25 17:58:45,451 Epoch number 16, batch number 0/5:       batch loss 0.9519222974777222
+2024-04-25 17:58:48,027 Epoch number 16, batch number 1/5:       batch loss 0.7486903667449951
+2024-04-25 17:58:50,174 Epoch number 16, batch number 2/5:       batch loss 0.8115123510360718
+2024-04-25 17:58:52,287 Epoch number 16, batch number 3/5:       batch loss 0.8473973870277405
+2024-04-25 17:58:54,405 Epoch number 16, batch number 4/5:       batch loss 0.7355552911758423
+2024-04-25 17:58:56,625 Epoch number 16, batch number 0/1:       batch loss 0.7634080648422241
+2024-04-25 17:58:56,760 Epoch: 17 	Training Loss: 0.054601
+2024-04-25 17:58:56,760 Time for epoch 17 : 15 sec
+2024-04-25 17:58:56,760 lr for epoch 17 is 0.01000
+2024-04-25 17:59:00,472 Epoch number 17, batch number 0/5:       batch loss 0.7356141805648804
+2024-04-25 17:59:02,926 Epoch number 17, batch number 1/5:       batch loss 0.8295115232467651
+2024-04-25 17:59:05,080 Epoch number 17, batch number 2/5:       batch loss 0.8787013292312622
+2024-04-25 17:59:07,208 Epoch number 17, batch number 3/5:       batch loss 0.8139470219612122
+2024-04-25 17:59:08,824 Epoch number 17, batch number 4/5:       batch loss 0.7484246492385864
+2024-04-25 17:59:11,481 Epoch number 17, batch number 0/1:       batch loss 1.4546340703964233
+2024-04-25 17:59:11,636 Epoch: 18 	Training Loss: 0.053416
+2024-04-25 17:59:11,637 Time for epoch 18 : 15 sec
+2024-04-25 17:59:11,637 lr for epoch 18 is 0.01000
+2024-04-25 17:59:17,413 Epoch number 18, batch number 0/5:       batch loss 1.2930437326431274
+2024-04-25 17:59:18,595 Epoch number 18, batch number 1/5:       batch loss 0.5421430468559265
+2024-04-25 17:59:19,500 Epoch number 18, batch number 2/5:       batch loss 0.5627829432487488
+2024-04-25 17:59:20,390 Epoch number 18, batch number 3/5:       batch loss 0.4925753176212311
+2024-04-25 17:59:21,296 Epoch number 18, batch number 4/5:       batch loss 0.5458697080612183
+2024-04-25 17:59:23,987 Epoch number 18, batch number 0/1:       batch loss 1.5144596099853516
+2024-04-25 17:59:24,145 Epoch: 19 	Training Loss: 0.045819
+2024-04-25 17:59:24,145 Time for epoch 19 : 13 sec
+2024-04-25 17:59:24,145 lr for epoch 19 is 0.01000
+2024-04-25 17:59:29,951 Epoch number 19, batch number 0/5:       batch loss 1.542364239692688
+2024-04-25 17:59:34,560 Epoch number 19, batch number 1/5:       batch loss 1.4548609256744385
+2024-04-25 17:59:38,667 Epoch number 19, batch number 2/5:       batch loss 1.6410095691680908
+2024-04-25 17:59:42,969 Epoch number 19, batch number 3/5:       batch loss 1302599.625
+2024-04-25 17:59:46,964 Epoch number 19, batch number 4/5:       batch loss 873943.9375
+2024-04-25 17:59:49,724 Epoch number 19, batch number 0/1:       batch loss 1748933.75
+2024-04-25 17:59:49,863 Epoch: 20 	Training Loss: 29020.642676
+2024-04-25 17:59:49,863 Time for epoch 20 : 26 sec
+2024-04-25 17:59:49,864 lr for epoch 20 is 0.01000
+2024-04-25 17:59:55,691 Epoch number 20, batch number 0/5:       batch loss 1822254.125
+2024-04-25 18:00:00,335 Epoch number 20, batch number 1/5:       batch loss 520956.625
+2024-04-25 18:00:04,415 Epoch number 20, batch number 2/5:       batch loss 627706.875
+2024-04-25 18:00:08,466 Epoch number 20, batch number 3/5:       batch loss 717615.3125
+2024-04-25 18:00:12,517 Epoch number 20, batch number 4/5:       batch loss 431866.6875
+2024-04-25 18:00:15,280 Epoch number 20, batch number 0/1:       batch loss 921941.4375
+2024-04-25 18:00:15,424 Epoch: 21 	Training Loss: 54938.661667
+2024-04-25 18:00:15,425 Time for epoch 21 : 26 sec
+2024-04-25 18:00:15,425 lr for epoch 21 is 0.01000
+2024-04-25 18:00:21,193 Epoch number 21, batch number 0/5:       batch loss 524126.09375
+2024-04-25 18:00:25,753 Epoch number 21, batch number 1/5:       batch loss 772424.5625
+2024-04-25 18:00:30,203 Epoch number 21, batch number 2/5:       batch loss 1.8623520135879517
+2024-04-25 18:00:33,555 Epoch number 21, batch number 3/5:       batch loss 1.5569931268692017
+2024-04-25 18:00:37,594 Epoch number 21, batch number 4/5:       batch loss 1.5315850973129272
+2024-04-25 18:00:40,149 Epoch number 21, batch number 0/1:       batch loss 1.439735770225525
+2024-04-25 18:00:40,307 Epoch: 22 	Training Loss: 17287.408096
+2024-04-25 18:00:40,307 Time for epoch 22 : 25 sec
+2024-04-25 18:00:40,307 lr for epoch 22 is 0.01000
+2024-04-25 18:00:45,442 Epoch number 22, batch number 0/5:       batch loss 1.4529778957366943
+2024-04-25 18:00:49,263 Epoch number 22, batch number 1/5:       batch loss 1.4419615268707275
+2024-04-25 18:00:52,689 Epoch number 22, batch number 2/5:       batch loss 1.2773195505142212
+2024-04-25 18:00:56,088 Epoch number 22, batch number 3/5:       batch loss 1.2233836650848389
+2024-04-25 18:00:59,495 Epoch number 22, batch number 4/5:       batch loss 1.4006303548812866
+2024-04-25 18:01:02,012 Epoch number 22, batch number 0/1:       batch loss 1.284894585609436
+2024-04-25 18:01:02,127 Epoch: 23 	Training Loss: 0.090617
+2024-04-25 18:01:02,127 Time for epoch 23 : 22 sec
+2024-04-25 18:01:02,127 lr for epoch 23 is 0.01000
+2024-04-25 18:01:07,113 Epoch number 23, batch number 0/5:       batch loss 1.1648337841033936
+2024-04-25 18:01:10,820 Epoch number 23, batch number 1/5:       batch loss 1.316043496131897
+2024-04-25 18:01:14,179 Epoch number 23, batch number 2/5:       batch loss 1.2980806827545166
+2024-04-25 18:01:18,364 Epoch number 23, batch number 3/5:       batch loss 1.5964775085449219
+2024-04-25 18:01:21,940 Epoch number 23, batch number 4/5:       batch loss 1.2997550964355469
+2024-04-25 18:01:24,528 Epoch number 23, batch number 0/1:       batch loss 1.316093921661377
+2024-04-25 18:01:24,651 Epoch: 24 	Training Loss: 0.089003
+2024-04-25 18:01:24,651 Time for epoch 24 : 23 sec
+2024-04-25 18:01:24,651 lr for epoch 24 is 0.01000
+2024-04-25 18:01:29,719 Epoch number 24, batch number 0/5:       batch loss 1.1971980333328247
+2024-04-25 18:01:33,607 Epoch number 24, batch number 1/5:       batch loss 1.30247163772583
+2024-04-25 18:01:37,112 Epoch number 24, batch number 2/5:       batch loss 1.3991538286209106
+2024-04-25 18:01:40,484 Epoch number 24, batch number 3/5:       batch loss 1.490554928779602
+2024-04-25 18:01:43,886 Epoch number 24, batch number 4/5:       batch loss 1.417838215827942
+2024-04-25 18:01:46,401 Epoch number 24, batch number 0/1:       batch loss 1.3848588466644287
+2024-04-25 18:01:46,541 Epoch: 25 	Training Loss: 0.090763
+2024-04-25 18:01:46,541 Time for epoch 25 : 22 sec
+2024-04-25 18:01:46,541 lr for epoch 25 is 0.01000
+2024-04-25 18:01:51,574 Epoch number 25, batch number 0/5:       batch loss 1.400245189666748
+2024-04-25 18:01:55,373 Epoch number 25, batch number 1/5:       batch loss 1.2007008790969849
+2024-04-25 18:01:58,827 Epoch number 25, batch number 2/5:       batch loss 1.1610974073410034
+2024-04-25 18:02:02,165 Epoch number 25, batch number 3/5:       batch loss 1.2258906364440918
+2024-04-25 18:02:05,535 Epoch number 25, batch number 4/5:       batch loss 1.1748199462890625
+2024-04-25 18:02:08,099 Epoch number 25, batch number 0/1:       batch loss 1.1074943542480469
+2024-04-25 18:02:08,216 Epoch: 26 	Training Loss: 0.082170
+2024-04-25 18:02:08,217 Time for epoch 26 : 22 sec
+2024-04-25 18:02:08,217 lr for epoch 26 is 0.01000
+2024-04-25 18:02:13,399 Epoch number 26, batch number 0/5:       batch loss 1.1010483503341675
+2024-04-25 18:02:17,192 Epoch number 26, batch number 1/5:       batch loss 1.03628671169281
+2024-04-25 18:02:20,909 Epoch number 26, batch number 2/5:       batch loss 1.1153589487075806
+2024-04-25 18:02:22,554 Epoch number 26, batch number 3/5:       batch loss 0.8830788731575012
+2024-04-25 18:02:25,868 Epoch number 26, batch number 4/5:       batch loss 1.0276825428009033
+2024-04-25 18:02:28,505 Epoch number 26, batch number 0/1:       batch loss 1.1931654214859009
+2024-04-25 18:02:28,651 Epoch: 27 	Training Loss: 0.068846
+2024-04-25 18:02:28,651 Time for epoch 27 : 20 sec
+2024-04-25 18:02:28,651 lr for epoch 27 is 0.01000
+2024-04-25 18:02:34,043 Epoch number 27, batch number 0/5:       batch loss 1.2328287363052368
+2024-04-25 18:02:36,448 Epoch number 27, batch number 1/5:       batch loss 0.7939310669898987
+2024-04-25 18:02:38,582 Epoch number 27, batch number 2/5:       batch loss 0.76357102394104
+2024-04-25 18:02:40,741 Epoch number 27, batch number 3/5:       batch loss 0.7874190807342529
+2024-04-25 18:02:42,939 Epoch number 27, batch number 4/5:       batch loss 0.7265279293060303
+2024-04-25 18:02:45,099 Epoch number 27, batch number 0/1:       batch loss 0.7159211039543152
+2024-04-25 18:02:45,234 Epoch: 28 	Training Loss: 0.057390
+2024-04-25 18:02:45,234 Time for epoch 28 : 17 sec
+2024-04-25 18:02:45,234 lr for epoch 28 is 0.01000
+2024-04-25 18:02:48,930 Epoch number 28, batch number 0/5:       batch loss 0.7124237418174744
+2024-04-25 18:02:51,446 Epoch number 28, batch number 1/5:       batch loss 0.6676842570304871
+2024-04-25 18:02:53,596 Epoch number 28, batch number 2/5:       batch loss 0.69841068983078
+2024-04-25 18:02:55,762 Epoch number 28, batch number 3/5:       batch loss 0.6631396412849426
+2024-04-25 18:02:59,218 Epoch number 28, batch number 4/5:       batch loss 0.8188050985336304
+2024-04-25 18:03:01,801 Epoch number 28, batch number 0/1:       batch loss 0.9064939618110657
+2024-04-25 18:03:01,898 Epoch: 29 	Training Loss: 0.047473
+2024-04-25 18:03:01,899 Time for epoch 29 : 17 sec
+2024-04-25 18:03:01,899 lr for epoch 29 is 0.01000
+2024-04-25 18:03:06,966 Epoch number 29, batch number 0/5:       batch loss 0.8862131237983704
+2024-04-25 18:03:10,766 Epoch number 29, batch number 1/5:       batch loss 0.9243007898330688
+2024-04-25 18:03:14,190 Epoch number 29, batch number 2/5:       batch loss 0.7425364255905151
+2024-04-25 18:03:17,620 Epoch number 29, batch number 3/5:       batch loss 0.9582574963569641
+2024-04-25 18:03:19,765 Epoch number 29, batch number 4/5:       batch loss 0.6511595249176025
+2024-04-25 18:03:21,906 Epoch number 29, batch number 0/1:       batch loss 0.6709808707237244
+2024-04-25 18:03:22,037 Epoch: 30 	Training Loss: 0.055500
+2024-04-25 18:03:22,037 Time for epoch 30 : 20 sec
+2024-04-25 18:03:22,037 lr for epoch 30 is 0.01000
+2024-04-25 18:03:25,700 Epoch number 30, batch number 0/5:       batch loss 0.6595155000686646
+2024-04-25 18:03:28,193 Epoch number 30, batch number 1/5:       batch loss 0.6370333433151245
+2024-04-25 18:03:30,358 Epoch number 30, batch number 2/5:       batch loss 0.6336435079574585
+2024-04-25 18:03:32,455 Epoch number 30, batch number 3/5:       batch loss 0.686743438243866
+2024-04-25 18:03:36,586 Epoch number 30, batch number 4/5:       batch loss 0.7706669569015503
+2024-04-25 18:03:38,792 Epoch number 30, batch number 0/1:       batch loss 0.6225733160972595
+2024-04-25 18:03:38,895 Epoch: 31 	Training Loss: 0.045168
+2024-04-25 18:03:38,895 Time for epoch 31 : 17 sec
+2024-04-25 18:03:38,895 lr for epoch 31 is 0.01000
+2024-04-25 18:03:42,635 Epoch number 31, batch number 0/5:       batch loss 0.6206697225570679
+2024-04-25 18:03:46,950 Epoch number 31, batch number 1/5:       batch loss 0.7030280828475952
+2024-04-25 18:03:50,910 Epoch number 31, batch number 2/5:       batch loss 0.754384458065033
+2024-04-25 18:03:54,763 Epoch number 31, batch number 3/5:       batch loss 0.7803847789764404
+2024-04-25 18:03:56,936 Epoch number 31, batch number 4/5:       batch loss 0.669669508934021
+2024-04-25 18:03:59,183 Epoch number 31, batch number 0/1:       batch loss 0.6329306960105896
+2024-04-25 18:03:59,328 Epoch: 32 	Training Loss: 0.047042
+2024-04-25 18:03:59,328 Time for epoch 32 : 20 sec
+2024-04-25 18:03:59,328 lr for epoch 32 is 0.01000
+2024-04-25 18:04:03,067 Epoch number 32, batch number 0/5:       batch loss 0.6145997643470764
+2024-04-25 18:04:04,050 Epoch number 32, batch number 1/5:       batch loss 0.4472891092300415
+2024-04-25 18:04:04,801 Epoch number 32, batch number 2/5:       batch loss 0.4252890348434448
+2024-04-25 18:04:05,531 Epoch number 32, batch number 3/5:       batch loss 0.40239718556404114
+2024-04-25 18:04:06,257 Epoch number 32, batch number 4/5:       batch loss 0.36518147587776184
+2024-04-25 18:04:08,168 Epoch number 32, batch number 0/1:       batch loss 0.46170851588249207
+2024-04-25 18:04:08,297 Epoch: 33 	Training Loss: 0.030063
+2024-04-25 18:04:08,297 Time for epoch 33 : 9 sec
+2024-04-25 18:04:08,297 lr for epoch 33 is 0.01000
+2024-04-25 18:04:10,627 Epoch number 33, batch number 0/5:       batch loss 0.4343351125717163
+2024-04-25 18:04:11,821 Epoch number 33, batch number 1/5:       batch loss 0.42329028248786926
+2024-04-25 18:04:12,776 Epoch number 33, batch number 2/5:       batch loss 0.36609765887260437
+2024-04-25 18:04:13,620 Epoch number 33, batch number 3/5:       batch loss 0.3483694791793823
+2024-04-25 18:04:14,377 Epoch number 33, batch number 4/5:       batch loss 0.3034883439540863
+2024-04-25 18:04:16,361 Epoch number 33, batch number 0/1:       batch loss 0.28806889057159424
+2024-04-25 18:04:16,504 Epoch: 34 	Training Loss: 0.025008
+2024-04-25 18:04:16,504 Time for epoch 34 : 8 sec
+2024-04-25 18:04:16,504 lr for epoch 34 is 0.01000
+2024-04-25 18:04:18,702 Epoch number 34, batch number 0/5:       batch loss 0.26765871047973633
+2024-04-25 18:04:19,578 Epoch number 34, batch number 1/5:       batch loss 0.2767140567302704
+2024-04-25 18:04:20,438 Epoch number 34, batch number 2/5:       batch loss 0.22797974944114685
+2024-04-25 18:04:21,333 Epoch number 34, batch number 3/5:       batch loss 0.25223976373672485
+2024-04-25 18:04:22,060 Epoch number 34, batch number 4/5:       batch loss 0.2695365846157074
+2024-04-25 18:04:23,856 Epoch number 34, batch number 0/1:       batch loss 0.2511163353919983
+2024-04-25 18:04:23,968 Epoch: 35 	Training Loss: 0.017255
+2024-04-25 18:04:23,969 Time for epoch 35 : 7 sec
+2024-04-25 18:04:23,969 lr for epoch 35 is 0.01000
+2024-04-25 18:04:26,049 Epoch number 35, batch number 0/5:       batch loss 0.25080588459968567
+2024-04-25 18:04:26,989 Epoch number 35, batch number 1/5:       batch loss 0.24189551174640656
+2024-04-25 18:04:27,773 Epoch number 35, batch number 2/5:       batch loss 0.22944943606853485
+2024-04-25 18:04:28,538 Epoch number 35, batch number 3/5:       batch loss 0.22897444665431976
+2024-04-25 18:04:29,265 Epoch number 35, batch number 4/5:       batch loss 0.22415155172348022
+2024-04-25 18:04:31,103 Epoch number 35, batch number 0/1:       batch loss 0.21090441942214966
+2024-04-25 18:04:31,237 Epoch: 36 	Training Loss: 0.015670
+2024-04-25 18:04:31,237 Time for epoch 36 : 7 sec
+2024-04-25 18:04:31,238 lr for epoch 36 is 0.01000
+2024-04-25 18:04:33,298 Epoch number 36, batch number 0/5:       batch loss 0.20364564657211304
+2024-04-25 18:04:34,286 Epoch number 36, batch number 1/5:       batch loss 0.21122179925441742
+2024-04-25 18:04:35,252 Epoch number 36, batch number 2/5:       batch loss 0.20561864972114563
+2024-04-25 18:04:36,190 Epoch number 36, batch number 3/5:       batch loss 0.19192160665988922
+2024-04-25 18:04:37,085 Epoch number 36, batch number 4/5:       batch loss 0.20375441014766693
+2024-04-25 18:04:39,047 Epoch number 36, batch number 0/1:       batch loss 0.1848047375679016
+2024-04-25 18:04:39,180 Epoch: 37 	Training Loss: 0.013549
+2024-04-25 18:04:39,180 Time for epoch 37 : 8 sec
+2024-04-25 18:04:39,180 lr for epoch 37 is 0.01000
+2024-04-25 18:04:41,507 Epoch number 37, batch number 0/5:       batch loss 0.1671755164861679
+2024-04-25 18:04:42,666 Epoch number 37, batch number 1/5:       batch loss 0.17593523859977722
+2024-04-25 18:04:43,609 Epoch number 37, batch number 2/5:       batch loss 0.19854454696178436
+2024-04-25 18:04:44,504 Epoch number 37, batch number 3/5:       batch loss 0.18319539725780487
+2024-04-25 18:04:45,231 Epoch number 37, batch number 4/5:       batch loss 0.20965413749217987
+2024-04-25 18:04:47,081 Epoch number 37, batch number 0/1:       batch loss 0.20319747924804688
+2024-04-25 18:04:47,196 Epoch: 38 	Training Loss: 0.012460
+2024-04-25 18:04:47,196 Time for epoch 38 : 8 sec
+2024-04-25 18:04:47,196 lr for epoch 38 is 0.01000
+2024-04-25 18:04:49,246 Epoch number 38, batch number 0/5:       batch loss 0.20910802483558655
+2024-04-25 18:04:50,242 Epoch number 38, batch number 1/5:       batch loss 0.20050740242004395
+2024-04-25 18:04:51,037 Epoch number 38, batch number 2/5:       batch loss 0.20288272202014923
+2024-04-25 18:04:51,770 Epoch number 38, batch number 3/5:       batch loss 0.18271993100643158
+2024-04-25 18:04:52,500 Epoch number 38, batch number 4/5:       batch loss 0.19894927740097046
+2024-04-25 18:04:54,343 Epoch number 38, batch number 0/1:       batch loss 0.19190527498722076
+2024-04-25 18:04:54,444 Epoch: 39 	Training Loss: 0.013256
+2024-04-25 18:04:54,444 Time for epoch 39 : 7 sec
+2024-04-25 18:04:54,444 lr for epoch 39 is 0.01000
+2024-04-25 18:04:56,568 Epoch number 39, batch number 0/5:       batch loss 0.2000918984413147
+2024-04-25 18:04:57,567 Epoch number 39, batch number 1/5:       batch loss 0.18204769492149353
+2024-04-25 18:04:58,366 Epoch number 39, batch number 2/5:       batch loss 0.19237203896045685
+2024-04-25 18:04:59,113 Epoch number 39, batch number 3/5:       batch loss 0.181922048330307
+2024-04-25 18:04:59,829 Epoch number 39, batch number 4/5:       batch loss 0.1882377415895462
+2024-04-25 18:05:01,736 Epoch number 39, batch number 0/1:       batch loss 0.18365290760993958
+2024-04-25 18:05:01,880 Epoch: 40 	Training Loss: 0.012596
+2024-04-25 18:05:01,880 Time for epoch 40 : 7 sec
+2024-04-25 18:05:01,880 lr for epoch 40 is 0.01000
+2024-04-25 18:05:07,980 Epoch number 0, batch number 0/1:       batch loss 0.18357229232788086
+2024-04-25 18:05:08,037 Epoch: 1 	Training Loss: 0.012238
+2024-04-25 18:05:08,037 Time for epoch 1 : 4 sec
+2024-04-25 18:05:08,037 lr for epoch 1 is 0.01000
+2024-04-25 18:05:09,377 Epoch number 0, batch number 0/1:       batch loss 0.18215060234069824
+2024-04-25 18:05:13,081 Epoch number 1, batch number 0/1:       batch loss 0.18200883269309998
+2024-04-25 18:05:13,112 Epoch: 2 	Training Loss: 0.012134
+2024-04-25 18:05:13,112 Time for epoch 2 : 4 sec
+2024-04-25 18:05:13,112 lr for epoch 2 is 0.01000
+2024-04-25 18:05:14,506 Epoch number 1, batch number 0/1:       batch loss 0.18050731718540192
+2024-04-25 18:05:18,212 Epoch number 2, batch number 0/1:       batch loss 0.18069809675216675
+2024-04-25 18:05:18,248 Epoch: 3 	Training Loss: 0.012047
+2024-04-25 18:05:18,248 Time for epoch 3 : 4 sec
+2024-04-25 18:05:18,248 lr for epoch 3 is 0.01000
+2024-04-25 18:05:19,694 Epoch number 2, batch number 0/1:       batch loss 0.1792224496603012
+2024-04-25 18:05:23,411 Epoch number 3, batch number 0/1:       batch loss 0.17937825620174408
+2024-04-25 18:05:23,447 Epoch: 4 	Training Loss: 0.011959
+2024-04-25 18:05:23,447 Time for epoch 4 : 4 sec
+2024-04-25 18:05:23,448 lr for epoch 4 is 0.01000
+2024-04-25 18:05:24,798 Epoch number 3, batch number 0/1:       batch loss 0.1776195466518402
+2024-04-25 18:05:28,510 Epoch number 4, batch number 0/1:       batch loss 0.17757835984230042
+2024-04-25 18:05:28,541 Epoch: 5 	Training Loss: 0.011839
+2024-04-25 18:05:28,541 Time for epoch 5 : 4 sec
+2024-04-25 18:05:28,541 lr for epoch 5 is 0.01000
+2024-04-25 18:05:29,929 Epoch number 4, batch number 0/1:       batch loss 0.17608855664730072
+2024-04-25 18:05:33,662 Epoch number 5, batch number 0/1:       batch loss 0.17615388333797455
+2024-04-25 18:05:33,707 Epoch: 6 	Training Loss: 0.011744
+2024-04-25 18:05:33,707 Time for epoch 6 : 4 sec
+2024-04-25 18:05:33,707 lr for epoch 6 is 0.01000
+2024-04-25 18:05:35,079 Epoch number 5, batch number 0/1:       batch loss 0.17485053837299347
+2024-04-25 18:05:38,794 Epoch number 6, batch number 0/1:       batch loss 0.17488925158977509
+2024-04-25 18:05:38,840 Epoch: 7 	Training Loss: 0.011659
+2024-04-25 18:05:38,841 Time for epoch 7 : 4 sec
+2024-04-25 18:05:38,841 lr for epoch 7 is 0.01000
+2024-04-25 18:05:40,260 Epoch number 6, batch number 0/1:       batch loss 0.17359063029289246
+2024-04-25 18:05:44,002 Epoch number 7, batch number 0/1:       batch loss 0.17348214983940125
+2024-04-25 18:05:44,048 Epoch: 8 	Training Loss: 0.011565
+2024-04-25 18:05:44,048 Time for epoch 8 : 4 sec
+2024-04-25 18:05:44,049 lr for epoch 8 is 0.01000
+2024-04-25 18:05:45,406 Epoch number 7, batch number 0/1:       batch loss 0.17244678735733032
+2024-04-25 18:05:49,087 Epoch number 8, batch number 0/1:       batch loss 0.17231200635433197
+2024-04-25 18:05:49,129 Epoch: 9 	Training Loss: 0.011487
+2024-04-25 18:05:49,129 Time for epoch 9 : 4 sec
+2024-04-25 18:05:49,129 lr for epoch 9 is 0.01000
+2024-04-25 18:05:50,472 Epoch number 8, batch number 0/1:       batch loss 0.17180773615837097
+2024-04-25 18:05:54,172 Epoch number 9, batch number 0/1:       batch loss 0.17139433324337006
+2024-04-25 18:05:54,218 Epoch: 10 	Training Loss: 0.011426
+2024-04-25 18:05:54,219 Time for epoch 10 : 4 sec
+2024-04-25 18:05:54,219 lr for epoch 10 is 0.01000
+2024-04-25 18:05:55,645 Epoch number 9, batch number 0/1:       batch loss 0.17100515961647034
+2024-04-25 18:06:22,297 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:22,297 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:22,297 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:06:22,297 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:06:22,304 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:22,304 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:22,309 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:22,310 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:06:50,755 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:50,755 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:50,755 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:06:50,756 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:06:50,762 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:50,762 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:50,766 findfont: Font family 'Arial' not found.
+2024-04-25 18:06:50,768 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:07:19,781 findfont: Font family 'Arial' not found.
+2024-04-25 18:07:19,781 findfont: Font family 'Arial' not found.
+2024-04-25 18:07:19,781 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:07:19,781 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:07:19,788 findfont: Font family 'Arial' not found.
+2024-04-25 18:07:19,788 findfont: Font family 'Arial' not found.
+2024-04-25 18:07:19,792 findfont: Font family 'Arial' not found.
+2024-04-25 18:07:19,794 findfont: Font family 'Times New Roman' not found.
+2024-04-25 18:07:27,310 Run Finished Successfully

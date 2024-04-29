@@ -1,0 +1,97 @@
+2024-04-25 17:02:21,543 This is a summery of the run:
+2024-04-25 17:02:21,543 Batch size for this run: 15
+2024-04-25 17:02:21,543 Size of original image: 32 X 32
+2024-04-25 17:02:21,543 number of masks: 512
+2024-04-25 17:02:21,543 Compression ratio: 2
+2024-04-25 17:02:21,543 epochs : 40
+2024-04-25 17:02:21,543 one learning rate: 0.01
+2024-04-25 17:02:21,543 optimizer: adam
+2024-04-25 17:02:21,543 weight_decay: 0.0001
+2024-04-25 17:02:21,543 ***************************************************************************
+
+
+2024-04-25 17:02:21,544 learning rate: 0.01
+2024-04-25 17:02:27,182 Epoch number 0, batch number 0/5:       batch loss 16.09422492980957
+2024-04-25 17:02:28,419 Epoch number 0, batch number 1/5:       batch loss 0.20968617498874664
+2024-04-25 17:02:29,412 Epoch number 0, batch number 2/5:       batch loss 0.4366830289363861
+2024-04-25 17:02:30,312 Epoch number 0, batch number 3/5:       batch loss 0.5318520069122314
+2024-04-25 17:02:31,099 Epoch number 0, batch number 4/5:       batch loss 0.6521046757698059
+2024-04-25 17:02:33,046 Epoch number 0, batch number 0/1:       batch loss 0.6331815719604492
+2024-04-25 17:02:33,237 Epoch: 1 	Training Loss: 0.238994
+2024-04-25 17:02:33,237 Time for epoch 1 : 11 sec
+2024-04-25 17:02:33,237 lr for epoch 1 is 0.01000
+2024-04-25 17:02:35,450 Epoch number 1, batch number 0/5:       batch loss 0.5821648240089417
+2024-04-25 17:02:36,508 Epoch number 1, batch number 1/5:       batch loss 0.4320930540561676
+2024-04-25 17:02:37,371 Epoch number 1, batch number 2/5:       batch loss 0.544111967086792
+2024-04-25 17:02:38,162 Epoch number 1, batch number 3/5:       batch loss 0.6904985904693604
+2024-04-25 17:02:38,978 Epoch number 1, batch number 4/5:       batch loss 0.60174959897995
+2024-04-25 17:02:41,074 Epoch number 1, batch number 0/1:       batch loss 0.6880602240562439
+2024-04-25 17:02:41,228 Epoch: 2 	Training Loss: 0.038008
+2024-04-25 17:02:41,228 Time for epoch 2 : 8 sec
+2024-04-25 17:02:41,228 lr for epoch 2 is 0.01000
+2024-04-25 17:02:43,482 Epoch number 2, batch number 0/5:       batch loss 0.6407663226127625
+2024-04-25 17:02:44,541 Epoch number 2, batch number 1/5:       batch loss 0.6542782187461853
+2024-04-25 17:02:45,427 Epoch number 2, batch number 2/5:       batch loss 0.6426013708114624
+2024-04-25 17:02:46,213 Epoch number 2, batch number 3/5:       batch loss 0.6376321911811829
+2024-04-25 17:02:47,011 Epoch number 2, batch number 4/5:       batch loss 0.6516198515892029
+2024-04-25 17:02:48,872 Epoch number 2, batch number 0/1:       batch loss 0.9558613896369934
+2024-04-25 17:02:48,989 Epoch: 3 	Training Loss: 0.043025
+2024-04-25 17:02:48,989 Time for epoch 3 : 8 sec
+2024-04-25 17:02:48,989 lr for epoch 3 is 0.01000
+2024-04-25 17:02:51,196 Epoch number 3, batch number 0/5:       batch loss 0.5962393283843994
+2024-04-25 17:02:52,422 Epoch number 3, batch number 1/5:       batch loss 0.6232888698577881
+2024-04-25 17:02:53,263 Epoch number 3, batch number 2/5:       batch loss 0.5394936800003052
+2024-04-25 17:02:54,066 Epoch number 3, batch number 3/5:       batch loss 0.6368493437767029
+2024-04-25 17:02:54,845 Epoch number 3, batch number 4/5:       batch loss 0.7664853930473328
+2024-04-25 17:02:56,762 Epoch number 3, batch number 0/1:       batch loss 0.6339395046234131
+2024-04-25 17:02:56,941 Epoch: 4 	Training Loss: 0.042165
+2024-04-25 17:02:56,941 Time for epoch 4 : 8 sec
+2024-04-25 17:02:56,941 lr for epoch 4 is 0.01000
+2024-04-25 17:02:59,266 Epoch number 4, batch number 0/5:       batch loss 0.4666842222213745
+2024-04-25 17:03:00,310 Epoch number 4, batch number 1/5:       batch loss 0.5073326826095581
+2024-04-25 17:03:01,172 Epoch number 4, batch number 2/5:       batch loss 0.4955478608608246
+2024-04-25 17:03:01,993 Epoch number 4, batch number 3/5:       batch loss 0.4731425940990448
+2024-04-25 17:03:02,772 Epoch number 4, batch number 4/5:       batch loss 0.5193466544151306
+2024-04-25 17:03:04,692 Epoch number 4, batch number 0/1:       batch loss 0.5021403431892395
+2024-04-25 17:03:04,863 Epoch: 5 	Training Loss: 0.032827
+2024-04-25 17:03:04,864 Time for epoch 5 : 8 sec
+2024-04-25 17:03:04,864 lr for epoch 5 is 0.01000
+2024-04-25 17:03:07,054 Epoch number 5, batch number 0/5:       batch loss 0.45015472173690796
+2024-04-25 17:03:08,209 Epoch number 5, batch number 1/5:       batch loss 0.441247820854187
+2024-04-25 17:03:08,999 Epoch number 5, batch number 2/5:       batch loss 0.4136222302913666
+2024-04-25 17:03:09,882 Epoch number 5, batch number 3/5:       batch loss 0.4271763563156128
+2024-04-25 17:03:10,659 Epoch number 5, batch number 4/5:       batch loss 0.3653140664100647
+2024-04-25 17:03:12,558 Epoch number 5, batch number 0/1:       batch loss 0.51206374168396
+2024-04-25 17:03:12,723 Epoch: 6 	Training Loss: 0.027967
+2024-04-25 17:03:12,723 Time for epoch 6 : 8 sec
+2024-04-25 17:03:12,723 lr for epoch 6 is 0.01000
+2024-04-25 17:03:14,957 Epoch number 6, batch number 0/5:       batch loss 0.3516559302806854
+2024-04-25 17:03:16,032 Epoch number 6, batch number 1/5:       batch loss 0.43799731135368347
+2024-04-25 17:03:16,917 Epoch number 6, batch number 2/5:       batch loss 0.4408872425556183
+2024-04-25 17:03:17,767 Epoch number 6, batch number 3/5:       batch loss 0.5128870606422424
+2024-04-25 17:03:18,584 Epoch number 6, batch number 4/5:       batch loss 0.42350420355796814
+2024-04-25 17:03:20,505 Epoch number 6, batch number 0/1:       batch loss 0.45462754368782043
+2024-04-25 17:03:20,676 Epoch: 7 	Training Loss: 0.028892
+2024-04-25 17:03:20,676 Time for epoch 7 : 8 sec
+2024-04-25 17:03:20,676 lr for epoch 7 is 0.01000
+2024-04-25 17:03:22,978 Epoch number 7, batch number 0/5:       batch loss 0.4812820851802826
+2024-04-25 17:03:24,103 Epoch number 7, batch number 1/5:       batch loss 0.37690073251724243
+2024-04-25 17:03:24,314 Error occurred for this parameters. Exception: linalg.cholesky: The factorization could not be completed because the input is not positive-definite (the leading minor of order 1 is not positive-definite).
+2024-04-25 17:03:24,314 Traceback (most recent call last):
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main.py", line 76, in run_model
+    train(p, logs, folder_path, writers)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 43, in train
+    train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 218, in train_epoch
+    loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sb_params_batch, sim_object, n_masks, img_dim, device)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Modified_Loss.py", line 14, in loss_function
+    reconstruct_imgs_batch = breg_rec(diffuser_batch.reshape(n_masks, img_dim), sim_bucket, sb_params_batch).to(device)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Modified_Loss.py", line 26, in breg_rec
+    rec = sparse_encode(bucket_batch[rec_ind].reshape(1, n_masks), diffuser, maxiter=maxiter, niter_inner=niter_inner, alpha=alpha,
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Lasso.py", line 66, in sparse_encode
+    z, _ = split_bregman(weight, x, z0, alpha, **kwargs)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Lasso.py", line 139, in split_bregman
+    AtA_inv = torch.cholesky_inverse(torch.linalg.cholesky(AtA))
+torch._C._LinAlgError: linalg.cholesky: The factorization could not be completed because the input is not positive-definite (the leading minor of order 1 is not positive-definite).
+
+2024-04-25 17:03:24,314 Results/cr_2/MyModel_cr_2___bs_15_wd_0.0001_lr_0.01

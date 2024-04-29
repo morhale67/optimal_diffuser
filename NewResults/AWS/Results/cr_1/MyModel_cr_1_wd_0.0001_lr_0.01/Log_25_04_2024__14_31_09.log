@@ -1,0 +1,86 @@
+2024-04-25 14:31:09,793 This is a summery of the run:
+2024-04-25 14:31:09,793 Batch size for this run: 8
+2024-04-25 14:31:09,793 Size of original image: 32 X 32
+2024-04-25 14:31:09,793 number of masks: 1024
+2024-04-25 14:31:09,793 Compression ratio: 1
+2024-04-25 14:31:09,793 epochs : 40
+2024-04-25 14:31:09,793 one learning rate: 0.01
+2024-04-25 14:31:09,793 optimizer: adam
+2024-04-25 14:31:09,793 weight_decay: 0.0001
+2024-04-25 14:31:09,793 ***************************************************************************
+
+
+2024-04-25 14:31:09,793 learning rate: 0.01
+2024-04-25 14:31:11,916 Epoch number 0, batch number 0/10:       batch loss 0.7325505614280701
+2024-04-25 14:31:12,742 Epoch number 0, batch number 1/10:       batch loss 0.09695351868867874
+2024-04-25 14:31:13,660 Epoch number 0, batch number 2/10:       batch loss 0.09428919851779938
+2024-04-25 14:31:14,590 Epoch number 0, batch number 3/10:       batch loss 0.08480095118284225
+2024-04-25 14:31:15,502 Epoch number 0, batch number 4/10:       batch loss 0.0827287882566452
+2024-04-25 14:31:16,435 Epoch number 0, batch number 5/10:       batch loss 0.09624536335468292
+2024-04-25 14:31:17,358 Epoch number 0, batch number 6/10:       batch loss 0.0921768844127655
+2024-04-25 14:31:18,284 Epoch number 0, batch number 7/10:       batch loss 0.09040579199790955
+2024-04-25 14:31:19,212 Epoch number 0, batch number 8/10:       batch loss 0.0861840471625328
+2024-04-25 14:31:20,141 Epoch number 0, batch number 9/10:       batch loss 0.08045484125614166
+2024-04-25 14:31:21,454 Epoch number 0, batch number 0/2:       batch loss 0.07194660604000092
+2024-04-25 14:31:21,840 Epoch number 0, batch number 1/2:       batch loss 0.07095709443092346
+2024-04-25 14:31:21,960 Epoch: 1 	Training Loss: 0.019210
+2024-04-25 14:31:21,960 Time for epoch 1 : 11 sec
+2024-04-25 14:31:21,960 lr for epoch 1 is 0.01000
+2024-04-25 14:31:23,892 Epoch number 1, batch number 0/10:       batch loss 0.0736071914434433
+2024-04-25 14:31:24,848 Epoch number 1, batch number 1/10:       batch loss 0.08905784785747528
+2024-04-25 14:31:25,759 Epoch number 1, batch number 2/10:       batch loss 0.09200000017881393
+2024-04-25 14:31:26,682 Epoch number 1, batch number 3/10:       batch loss 0.06567398458719254
+2024-04-25 14:31:27,718 Epoch number 1, batch number 4/10:       batch loss 0.06385274231433868
+2024-04-25 14:31:28,766 Epoch number 1, batch number 5/10:       batch loss 0.0625724047422409
+2024-04-25 14:31:29,803 Epoch number 1, batch number 6/10:       batch loss 0.05999308079481125
+2024-04-25 14:31:30,840 Epoch number 1, batch number 7/10:       batch loss 0.058732349425554276
+2024-04-25 14:31:31,877 Epoch number 1, batch number 8/10:       batch loss 0.06272925436496735
+2024-04-25 14:31:32,923 Epoch number 1, batch number 9/10:       batch loss 0.053585778921842575
+2024-04-25 14:31:34,351 Epoch number 1, batch number 0/2:       batch loss 0.0745895728468895
+2024-04-25 14:31:34,844 Epoch number 1, batch number 1/2:       batch loss 0.05990417301654816
+2024-04-25 14:31:34,973 Epoch: 2 	Training Loss: 0.008523
+2024-04-25 14:31:34,973 Time for epoch 2 : 13 sec
+2024-04-25 14:31:34,973 lr for epoch 2 is 0.01000
+2024-04-25 14:31:37,061 Epoch number 2, batch number 0/10:       batch loss 0.04336263984441757
+2024-04-25 14:31:38,162 Epoch number 2, batch number 1/10:       batch loss 0.08436132967472076
+2024-04-25 14:31:39,214 Epoch number 2, batch number 2/10:       batch loss 0.045824531465768814
+2024-04-25 14:31:40,260 Epoch number 2, batch number 3/10:       batch loss 0.05525302141904831
+2024-04-25 14:31:41,305 Epoch number 2, batch number 4/10:       batch loss 0.04253081977367401
+2024-04-25 14:31:42,348 Epoch number 2, batch number 5/10:       batch loss 0.06016121059656143
+2024-04-25 14:31:43,389 Epoch number 2, batch number 6/10:       batch loss 0.0672464519739151
+2024-04-25 14:31:44,438 Epoch number 2, batch number 7/10:       batch loss 0.06442521512508392
+2024-04-25 14:31:45,484 Epoch number 2, batch number 8/10:       batch loss 0.05337292328476906
+2024-04-25 14:31:46,529 Epoch number 2, batch number 9/10:       batch loss 0.05536136031150818
+2024-04-25 14:31:47,928 Epoch number 2, batch number 0/2:       batch loss 0.05880126357078552
+2024-04-25 14:31:48,298 Epoch number 2, batch number 1/2:       batch loss 0.050900328904390335
+2024-04-25 14:31:48,468 Epoch: 3 	Training Loss: 0.007149
+2024-04-25 14:31:48,468 Time for epoch 3 : 13 sec
+2024-04-25 14:31:48,469 lr for epoch 3 is 0.01000
+2024-04-25 14:31:53,581 Error occurred for this parameters. Exception: DataLoader worker (pid(s) 334662, 334725, 334788) exited unexpectedly
+2024-04-25 14:31:53,581 Traceback (most recent call last):
+  File "/opt/conda/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1132, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/opt/conda/lib/python3.10/multiprocessing/queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main.py", line 76, in run_model
+    train(p, logs, folder_path, writers)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 43, in train
+    train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 211, in train_epoch
+    for batch_index, sim_bucket_tensor in enumerate(loader):
+  File "/opt/conda/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
+    data = self._next_data()
+  File "/opt/conda/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1328, in _next_data
+    idx, data = self._get_data()
+  File "/opt/conda/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1294, in _get_data
+    success, data = self._try_get_data()
+  File "/opt/conda/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1145, in _try_get_data
+    raise RuntimeError(f'DataLoader worker (pid(s) {pids_str}) exited unexpectedly') from e
+RuntimeError: DataLoader worker (pid(s) 334662, 334725, 334788) exited unexpectedly
+
+2024-04-25 14:31:53,581 Results/cr_1/MyModel_cr_1_wd_0.0001_lr_0.01

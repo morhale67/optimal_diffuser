@@ -1,0 +1,56 @@
+2024-04-25 14:51:44,951 This is a summery of the run:
+2024-04-25 14:51:44,951 Batch size for this run: 8
+2024-04-25 14:51:44,951 Size of original image: 32 X 32
+2024-04-25 14:51:44,951 number of masks: 512
+2024-04-25 14:51:44,951 Compression ratio: 2
+2024-04-25 14:51:44,951 epochs : 40
+2024-04-25 14:51:44,951 one learning rate: 0.01
+2024-04-25 14:51:44,951 optimizer: adam
+2024-04-25 14:51:44,951 weight_decay: 0.0001
+2024-04-25 14:51:44,951 ***************************************************************************
+
+
+2024-04-25 14:51:44,951 learning rate: 0.01
+2024-04-25 14:51:47,365 Epoch number 0, batch number 0/10:       batch loss 2.0978031158447266
+2024-04-25 14:51:48,181 Epoch number 0, batch number 1/10:       batch loss 0.46746572852134705
+2024-04-25 14:51:48,831 Epoch number 0, batch number 2/10:       batch loss 1.2405130863189697
+2024-04-25 14:51:49,441 Epoch number 0, batch number 3/10:       batch loss 1.8295000791549683
+2024-04-25 14:51:50,049 Epoch number 0, batch number 4/10:       batch loss 2.40718412399292
+2024-04-25 14:51:50,660 Epoch number 0, batch number 5/10:       batch loss 1.9461877346038818
+2024-04-25 14:51:51,268 Epoch number 0, batch number 6/10:       batch loss 1.4506282806396484
+2024-04-25 14:51:51,873 Epoch number 0, batch number 7/10:       batch loss 1.5232858657836914
+2024-04-25 14:51:52,640 Epoch number 0, batch number 8/10:       batch loss 1.759928584098816
+2024-04-25 14:51:53,414 Epoch number 0, batch number 9/10:       batch loss 2.2572031021118164
+2024-04-25 14:51:54,801 Epoch number 0, batch number 0/2:       batch loss 3.1023144721984863
+2024-04-25 14:51:55,572 Epoch number 0, batch number 1/2:       batch loss 1.1303867101669312
+2024-04-25 14:51:55,721 Epoch: 1 	Training Loss: 0.212246
+2024-04-25 14:51:55,721 Time for epoch 1 : 10 sec
+2024-04-25 14:51:55,721 lr for epoch 1 is 0.01000
+2024-04-25 14:51:57,597 Epoch number 1, batch number 0/10:       batch loss 2.5381343364715576
+2024-04-25 14:51:58,393 Epoch number 1, batch number 1/10:       batch loss 1.8232474327087402
+2024-04-25 14:51:59,179 Epoch number 1, batch number 2/10:       batch loss 1.8291406631469727
+2024-04-25 14:51:59,984 Epoch number 1, batch number 3/10:       batch loss 2.759835720062256
+2024-04-25 14:52:00,738 Epoch number 1, batch number 4/10:       batch loss 3.219862461090088
+2024-04-25 14:52:01,494 Epoch number 1, batch number 5/10:       batch loss 4.22757625579834
+2024-04-25 14:52:02,271 Epoch number 1, batch number 6/10:       batch loss 1.7530122995376587
+2024-04-25 14:52:04,659 Epoch number 1, batch number 7/10:       batch loss 10.258133888244629
+2024-04-25 14:52:06,144 Epoch number 1, batch number 8/10:       batch loss 4.521756649017334
+2024-04-25 14:52:06,302 Error occurred for this parameters. Exception: linalg.cholesky: The factorization could not be completed because the input is not positive-definite (the leading minor of order 1 is not positive-definite).
+2024-04-25 14:52:06,302 Traceback (most recent call last):
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main.py", line 76, in run_model
+    train(p, logs, folder_path, writers)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 43, in train
+    train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
+  File "/home/ubuntu/Projects/Optimal_Diffuser/main_training.py", line 218, in train_epoch
+    loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sb_params_batch, sim_object, n_masks, img_dim, device)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Modified_Loss.py", line 14, in loss_function
+    reconstruct_imgs_batch = breg_rec(diffuser_batch.reshape(n_masks, img_dim), sim_bucket, sb_params_batch).to(device)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Modified_Loss.py", line 26, in breg_rec
+    rec = sparse_encode(bucket_batch[rec_ind].reshape(1, n_masks), diffuser, maxiter=maxiter, niter_inner=niter_inner, alpha=alpha,
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Lasso.py", line 66, in sparse_encode
+    z, _ = split_bregman(weight, x, z0, alpha, **kwargs)
+  File "/home/ubuntu/Projects/Optimal_Diffuser/Lasso.py", line 139, in split_bregman
+    AtA_inv = torch.cholesky_inverse(torch.linalg.cholesky(AtA))
+torch._C._LinAlgError: linalg.cholesky: The factorization could not be completed because the input is not positive-definite (the leading minor of order 1 is not positive-definite).
+
+2024-04-25 14:52:06,302 Results/cr_2/MyModel_cr_2___bs_8_wd_0.0001_lr_0.01
