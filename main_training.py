@@ -52,7 +52,8 @@ def train(params, logs, folder_path, writers, wb_flag=False):
                                                      train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
     hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
                                          device)
-    if len(hard_loader) == 0:
+    print(f'number of hard example: {len(hard_loader)}')
+    if len(hard_loader) != 0:
         numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs,
                                            folder_path, writers, numerical_outputs)
 
@@ -112,10 +113,6 @@ def get_lr(epoch, lr_vec, cum_epochs):
 
 
 def split_bregman_on_random_for_run(folder_path, params):
-    sb_params_batch = {'maxiter': 1,
-                       'niter_inner': 1,
-                       'alpha': 1,
-                       'total_variation_rate': 0}
     images_tensor = get_test_images(folder_path)
     cum_loss, cum_psnr, cum_ssim = 0, 0, 0
     for orig_image in images_tensor:
@@ -123,7 +120,7 @@ def split_bregman_on_random_for_run(folder_path, params):
         sim_diffuser = np.random.normal(0.5, 0.5, [params['n_masks'], params['img_dim']])
         sim_bucket = np.matmul(sim_diffuser, np_orig_image).transpose((1, 0))
         rec_image = sparse_encode(torch.from_numpy(sim_bucket).float(), torch.from_numpy(sim_diffuser).float(),
-                                  algorithm='split-bregman', sb_params_batch=sb_params_batch)
+                                  algorithm='split-bregman')
         pic_width = params['pic_width']
         loss = mean_squared_error(rec_image.flatten(), orig_image.flatten())
         psnr = PSNR(rec_image.flatten(), orig_image.flatten(), 1, params['img_dim'])
@@ -159,10 +156,10 @@ def hard_samples_extractor(trained_network, train_loader, cur_avg_loss, n_masks,
             if loss.item() > cur_avg_loss:
                 hard_examples.append((sim_object, label))
 
-    if len(hard_examples) > 0:
+    if len(hard_examples) == 0:
+        hard_loader = []
+    else:   
         hard_loader = DataLoader(hard_examples, batch_size=train_loader.batch_size, shuffle=True)
-    else:
-        hard_loader = False
     return hard_loader
 
 
@@ -178,8 +175,7 @@ def train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer,
         print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
         test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, hard_loader, test_loader, device,
                                                                      logs, folder_path, params['img_dim'],
-                                                                     params['n_masks'], writers, save_img=True,
-                                                                     wb_flag=False)
+                                                                     params['n_masks'], writers, save_img=True)
         numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
                                                      train_psnr_epoch, test_psnr_epoch, train_ssim_epoch,
                                                      test_ssim_epoch)

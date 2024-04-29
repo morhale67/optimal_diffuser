@@ -102,9 +102,8 @@ def test_diffuser(epoch, diffuser, sb_params, test_loader, device, logs, folder_
     return test_loss, test_psnr, test_ssim
 
 
-def test_net(epoch, trained_network, train_loader, test_loader, device, log_path, folder_path, img_dim, n_masks, wb_flag,
-             save_img):
+def test_net(epoch, trained_network, train_loader, test_loader, device, log_path, folder_path, img_dim, n_masks, writers, save_img):
     diffuser, sb_params = creat_diffuser_for_batch(trained_network, train_loader, img_dim, device)
     test_loss, test_psnr, test_ssim = test_diffuser(epoch, diffuser, sb_params, test_loader, device, log_path,
-                                                    folder_path, img_dim, n_masks, wb_flag, save_img)
+                                                    folder_path, img_dim, n_masks, writers, save_img)
     return test_loss, test_psnr, test_ssim

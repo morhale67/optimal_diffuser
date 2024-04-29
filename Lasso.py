@@ -73,7 +73,7 @@ def sparse_encode(x, weight, alpha=1.0, z0=None, algorithm='ista', init=None,
 
 
 def split_bregman(A, y, x0=None, alpha=1.0, lambd=1.0, maxiter=20, niter_inner=5,
-                  tol=1e-10, tau=1., sb_params_batch=False, verbose=False):
+                  tol=1e-10, tau=1., beta=0, sb_params_batch=False, verbose=False):
     """Split Bregman for L1-regularized least squares.
 
     Parameters

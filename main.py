@@ -23,7 +23,7 @@ def search_parameters(p):
         p['lr'] = lr
         for bs in [8, 10, 15, 20, 25]:
             p['batch_size'] = bs
-            for weight_decay in [1e-5, 1e-4, 1e-3]:
+            for weight_decay in [1e-4, 1e-3]:
                 p['weight_decay'] = weight_decay
                 for cr in [1, 2, 5, 10]:
                     writer_cr = SummaryWriter(f"TB/cr_{p['cr']}")
@@ -71,6 +71,7 @@ def run_model(p, writer_cr):
         logs, run_name = print_run_info_to_log(p, folder_path)
         print_and_log_message(f'learning rate: {p["lr"]}', logs[0])
         writer_run = SummaryWriter(f"TB/cr_{p['cr']}/{run_name}")
+        print(f'run_name is {run_name}')
         writers = [writer_cr, writer_run]
         train(p, logs, folder_path, writers)
     except Exception as e:
