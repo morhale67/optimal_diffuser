@@ -217,7 +217,6 @@ def sb_reconstraction_for_all_images(run_folder_path, cr, wb_flag):
 
 
 def rec_bregman_for_image(cr, image_folder, data_set, run_folder_path, wb_flag):
-
     images_path = os.path.join(run_folder_path, data_set, image_folder)
     org_img_name = [img for img in os.listdir(images_path) if f'_orig' in img]
     image_path = os.path.join(images_path, org_img_name[0])
@@ -290,22 +289,24 @@ def calc_cumu_ssim_batch(output, y_label, pic_width):
     return batch_ssim
 
 
-def save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag):
+def save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag, rand_sb=False):
     file_path = os.path.join(folder_path, 'numerical_outputs.pkl')
     with open(file_path, 'wb') as file:
         pickle.dump(numerical_outputs, file)
 
-    n_points = len(numerical_outputs['train_psnr'])
-    rand_diff_loss = np.full(n_points, numerical_outputs['rand_diff_loss'])
-    rand_diff_psnr = np.full(n_points, numerical_outputs['rand_diff_psnr'])
-    rand_diff_ssim = np.full(n_points, numerical_outputs['rand_diff_ssim'])
+    Loss_graphs = [[numerical_outputs['train_loss'], 'Train Loss'], [numerical_outputs['test_loss'], 'Test Loss']]
+    PSNR_graphs = [[numerical_outputs['train_psnr'], 'Train PSNR'], [numerical_outputs['test_psnr'], 'Test PSNR']]
+    SSIM_graphs = [[numerical_outputs['train_ssim'], 'Train SSIM'], [numerical_outputs['test_ssim'], 'Test SSIM']]
 
-    Loss_graphs = [[numerical_outputs['train_loss'], 'Train Loss'], [numerical_outputs['test_loss'], 'Test Loss'],
-                   [rand_diff_loss, 'Random Diffuser Loss']]
-    PSNR_graphs = [[numerical_outputs['train_psnr'], 'Train PSNR'], [numerical_outputs['test_psnr'], 'Test PSNR'],
-                   [rand_diff_psnr, 'Random Diffuser PSNR']]
-    SSIM_graphs = [[numerical_outputs['train_ssim'], 'Train SSIM'], [numerical_outputs['test_ssim'], 'Test SSIM'],
-                   [rand_diff_ssim, 'Random Diffuser SSIM']]
+    if rand_sb == True:
+        n_points = len(numerical_outputs['train_psnr'])
+        rand_diff_loss = np.full(n_points, numerical_outputs['rand_diff_loss'])
+        rand_diff_psnr = np.full(n_points, numerical_outputs['rand_diff_psnr'])
+        rand_diff_ssim = np.full(n_points, numerical_outputs['rand_diff_ssim'])
+
+        Loss_graphs = Loss_graphs + [[rand_diff_loss, 'Random Diffuser Loss']]
+        PSNR_graphs = PSNR_graphs + [[rand_diff_psnr, 'Random Diffuser PSNR']]
+        SSIM_graphs = SSIM_graphs + [[rand_diff_ssim, 'Random Diffuser SSIM']]
 
     save_numerical_figure(Loss_graphs, "Loss", "Loss", 'loss_figure.png', folder_path, wb_flag)
     save_numerical_figure(PSNR_graphs, "PSNR [dB]", "PSNR", 'PSNR_figure.png', folder_path, wb_flag)
@@ -317,10 +318,8 @@ def save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag):
             wandb.log({key: value})
 
 
-
-
-
-def image_results_subplot(run_folder_path, data_set='train_images', epochs_to_show=[0, 1, 2, 5, 10], imgs_to_plot=range(20)):
+def image_results_subplot(run_folder_path, data_set='train_images', epochs_to_show=[0, 1, 2, 5, 10],
+                          imgs_to_plot=range(20)):
     folder_path = os.path.join(run_folder_path, data_set)
     plt.figure(figsize=(50, 30))
     cols = 2 + len(epochs_to_show)
@@ -370,12 +369,9 @@ def image_results_subplot(run_folder_path, data_set='train_images', epochs_to_sh
     # plt.show()
 
 
-
-
-
-
 if __name__ == '__main__':
     run_folder_path = r'Results_to_save\Masks4\Masks4_simple_cifar_bs_2_cr_5_nsamples100_picw_32_epochs_36_wd_5e-07'
-    image_results_subplot(run_folder_path, data_set='train_images', epochs_to_show=[0, 2, 5, 20, 35], imgs_to_plot=[11, 13, 18, 19])
-    image_results_subplot(run_folder_path, data_set='test_images', epochs_to_show=[0, 2, 5, 20, 35], imgs_to_plot=[7, 13, 15, 16])
-
+    image_results_subplot(run_folder_path, data_set='train_images', epochs_to_show=[0, 2, 5, 20, 35],
+                          imgs_to_plot=[11, 13, 18, 19])
+    image_results_subplot(run_folder_path, data_set='test_images', epochs_to_show=[0, 2, 5, 20, 35],
+                          imgs_to_plot=[7, 13, 15, 16])

@@ -5,6 +5,105 @@ import math
 import numpy as np
 
 
+class ConvBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(ConvBlock, self).__init__()
+        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
+        self.bn = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU()
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+
+    def forward(self, x):
+        x = self.conv(x)
+        x = self.bn(x)
+        x = self.relu(x)
+        x = self.pool(x)
+        return x
+
+
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(ResidualBlock, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU()
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        self.downsample = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=1, stride=stride, bias=False),
+            nn.BatchNorm2d(out_channels)
+        )
+
+    def forward(self, x):
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+
+        if self.downsample is not None:
+            identity = self.downsample(x)
+
+        out += identity
+        out = self.relu(out)
+
+        return out
+
+
+class ResConv(nn.Module):
+    def __init__(self, img_dim, n_masks):
+        super(MyModel, self).__init__()
+        pic_width = int(np.sqrt(img_dim))
+
+        self.conv1 = ConvBlock(1, 32)
+        self.res1 = ResidualBlock(32, 64)
+        self.res2 = ResidualBlock(64, 128)
+        self.res3 = ResidualBlock(128, 256)
+
+        fc_input_size = 256 * (pic_width // 16) * (pic_width // 16)
+
+        self.fc1 = nn.Linear(fc_input_size, 512)
+        self.fc2 = nn.Linear(512, 256)
+        self.fc3 = nn.Linear(256, 128)
+
+        self.fc_diff = nn.Linear(256, n_masks * img_dim)
+        self.prob_vector1 = nn.Linear(128, 10)
+        self.prob_vector2 = nn.Linear(128, 10)
+        self.prob_vector3 = nn.Linear(128, 10)
+        self.prob_vector4 = nn.Linear(128, 10)
+
+    def forward(self, x_i):
+        x = self.conv1(x_i)
+        x = self.res1(x) + x
+        x = self.res2(x) + x
+        x = self.res3(x) + x
+
+        x = torch.flatten(x, 1)
+
+        x = self.fc1(x)
+        x = torch.relu(x)
+        x = self.fc2(x)
+        x = torch.relu(x)
+        x = self.fc3(x)
+        x = torch.relu(x)
+
+        diffuser = self.fc_diff(x)
+        diffuser = torch.sigmoid(diffuser)
+
+        prob_vector1 = self.prob_vector1(x)
+        prob_vector2 = self.prob_vector2(x)
+        prob_vector3 = self.prob_vector3(x)
+        prob_vector4 = self.prob_vector4(x)
+        prob_vectors = [prob_vector1, prob_vector2, prob_vector3, prob_vector4]
+
+        return diffuser, prob_vectors
+
+
+
+
 class MyModel(nn.Module):
     def __init__(self, img_dim, n_masks):
         super(MyModel, self).__init__()

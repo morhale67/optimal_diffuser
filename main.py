@@ -19,14 +19,13 @@ def main():
 
 
 def search_parameters(p):
-    for lr in [0.01, 0.001, 0.0001, 0.00001]:
+    for lr in [0.01, 0.001]:
         p['lr'] = lr
-        for bs in [8, 10, 15, 20, 25]:
+        for bs in [15, 20, 25]:
             p['batch_size'] = bs
             for weight_decay in [1e-4, 1e-3]:
                 p['weight_decay'] = weight_decay
                 for cr in [1, 2, 5, 10]:
-                    writer_cr = SummaryWriter(f"TB/cr_{p['cr']}")
                     p['cr'] = cr
                     p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
                     run_model(p, writer_cr)
@@ -58,18 +57,18 @@ def spec_multiple_runs(p):
     for i, run in enumerate(runs):
         print(f'Run {i}/{n_runs}')
         p['cr'] = run[0]
-        writer_cr = SummaryWriter(f"TB/cr_{p['cr']}")
         p['lr'] = run[1]
         p['weight_decay'] = run[2]
         p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-        run_model(p, writer_cr)
+        run_model(p)
 
 
-def run_model(p, writer_cr):
+def run_model(p):
     try:
         folder_path = make_folder(p)
         logs, run_name = print_run_info_to_log(p, folder_path)
         print_and_log_message(f'learning rate: {p["lr"]}', logs[0])
+        writer_cr = SummaryWriter(f"TB/cr_{p['cr']}")
         writer_run = SummaryWriter(f"TB/cr_{p['cr']}/{run_name}")
         print(f'run_name is {run_name}')
         writers = [writer_cr, writer_run]
