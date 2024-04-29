@@ -12,10 +12,9 @@ from io import StringIO
 
 def main():
     p = get_run_parameters()
-    search_parameters(p)
+    # search_parameters(p)
     # spec_multiple_runs(p)
-    # writer_cr = SummaryWriter(f"TB/cr_{p['cr']}", mode='a')
-    # run_model(p, writer_cr)
+    run_model(p)
 
 
 def search_parameters(p):
