@@ -3,14 +3,13 @@ import wandb
 
 
 def get_run_parameters():
-    p = {'data_medical': 'data_DSI/GCP_data',
-         'data_name': 'stl-10',
+    p = {'data_name': 'stl-10',
          'model_name': 'ResConv',
          'TV_beta': 0.5,
          'lr_vec': [0.1, 0.01, 0.001],
          'epochs_vec': [5, 30, 5],
          'learn_vec_lr': False,
-         'pic_width': 32,
+         'pic_width': 96,
          'n_samples': 2000,
          'cr': 2,
          'batch_size': 10,
@@ -18,8 +17,6 @@ def get_run_parameters():
          'epochs': 100,
          'optimizer': 'adam',
          'weight_decay': 5e-7,
-         # 'big_diffuser': False,
-         # 'ac_stride': 7,
          'num_workers': 4,
          'z_dim': 100}
     p['img_dim'] = p['pic_width']*p['pic_width']
