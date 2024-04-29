@@ -73,12 +73,10 @@ class ResConv(nn.Module):
         self.prob_vector4 = nn.Linear(128, 10)
 
     def forward(self, x_i):
+        print(x_i.shape)
         x = self.conv1(x_i)
-        print(x.shape)
         x = self.res1(x)
-        print(x.shape)
         x = self.res2(x)
-        print(x.shape)
         x = self.res3(x)
         print(x.shape)
         x = torch.flatten(x, 1)
