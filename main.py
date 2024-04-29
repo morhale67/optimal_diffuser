@@ -12,15 +12,15 @@ from io import StringIO
 
 def main():
     p = get_run_parameters()
-    # search_parameters(p)
+    search_parameters(p)
     # spec_multiple_runs(p)
-    run_model(p)
+    # run_model(p)
 
 
 def search_parameters(p):
     for lr in [0.01, 0.001]:
         p['lr'] = lr
-        for bs in [20, 50]:
+        for bs in [20, 50, 100]:
             p['batch_size'] = bs
             for weight_decay in [1e-4]:
                 p['weight_decay'] = weight_decay
