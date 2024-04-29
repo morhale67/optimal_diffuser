@@ -17,7 +17,6 @@ def main():
     # writer_cr = SummaryWriter(f"TB/cr_{p['cr']}", mode='a')
     # run_model(p, writer_cr)
 
-
 def search_parameters(p):
     for lr in [0.01, 0.001]:
         p['lr'] = lr
