@@ -20,6 +20,7 @@ class ConvBlock(nn.Module):
         x = self.pool(x)
         return x
 
+
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
         super(ResidualBlock, self).__init__()
@@ -53,18 +54,18 @@ class ResidualBlock(nn.Module):
 class ResConv(nn.Module):
     def __init__(self, img_dim, n_masks):
         super(ResConv, self).__init__()
-        pic_width = int(np.sqrt(img_dim))
 
         self.conv1 = ConvBlock(1, 32)
         self.res1 = ResidualBlock(32, 64)
         self.res2 = ResidualBlock(64, 128)
         self.res3 = ResidualBlock(128, 256)
 
-        fc_input_size = 256 * (pic_width // 2) * (pic_width // 2)
+        pic_width = int(np.sqrt(img_dim))
+        fc_input_size = 256 * (pic_width//2)**2
 
         self.fc1 = nn.Linear(fc_input_size, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 128)
+        self.fc3 = nn.Linear(256, n_masks*img_dim)
 
     def forward(self, x_i):
         x = self.conv1(x_i)
@@ -72,6 +73,7 @@ class ResConv(nn.Module):
         x = self.res2(x)
         x = self.res3(x)
         x = torch.flatten(x, 1)
+
         x = self.fc1(x)
         x = torch.relu(x)
         x = self.fc2(x)
@@ -82,8 +84,6 @@ class ResConv(nn.Module):
         diffuser = torch.sigmoid(x)
 
         return diffuser
-
-
 
 
 class MyModel(nn.Module):

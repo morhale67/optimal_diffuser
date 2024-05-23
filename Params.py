@@ -3,15 +3,16 @@ import wandb
 
 
 def get_run_parameters():
-    p = {'data_name': 'stl-10',
+    p = {'AWS_machine': True,
+         'data_name': 'stl-10',
          'model_name': 'ResConv',
          'TV_beta': 0.5,
          'lr_vec': [0.1, 0.01, 0.001],
          'epochs_vec': [5, 30, 5],
          'learn_vec_lr': False,
          'pic_width': 96,
-         'n_samples': 5000,
-         'cr': 2,
+         'n_samples': 2000,
+         'cr': 1,
          'batch_size': 10,
          'lr': 0.001,
          'epochs': 100,

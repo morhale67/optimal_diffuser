@@ -14,7 +14,7 @@ from sklearn.metrics import mean_squared_error
 from DataFunctions import build_dataset
 from Lasso import sparse_encode
 from Params import get_run_parameters
-from Testing import test_net, modify_output
+from Testing import test_net, get_avg_output_batch, test_random_sb
 from LogFunctions import print_and_log_message, print_training_messages
 from OutputHandler import save_numerical_figure, save_orig_img, save_all_run_numerical_outputs, PSNR, SSIM, \
     sb_reconstraction_for_all_images, image_results_subplot
@@ -23,7 +23,7 @@ from testers import check_diff, compare_buckets, check_diff_ac
 from OutputHandler import save_outputs, calc_cumu_ssim_batch, save_randomize_outputs, calc_cumu_psnr_batch
 
 
-def train(params, logs, folder_path, writers, wb_flag=False):
+def train(params, logs, folder_path, rel_path_s3, writers, wb_flag=False):
     train_loader, test_loader = build_dataset(params['batch_size'], params['num_workers'], params['pic_width'],
                                               params['n_samples'], params['data_name'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -34,6 +34,8 @@ def train(params, logs, folder_path, writers, wb_flag=False):
     save_orig_img(train_loader, folder_path, name_sub_folder='train_images')
     save_orig_img(test_loader, folder_path, name_sub_folder='test_images')
 
+    test_random_sb(rel_path_s3, test_loader, params['img_dim'], params['n_masks'], device)
+
     for epoch in range(params['epochs']):
         if params['learn_vec_lr']:
             lr = get_lr(epoch, params['lr_vec'], params['cum_epochs'])
@@ -42,16 +44,13 @@ def train(params, logs, folder_path, writers, wb_flag=False):
         train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, train_loader, optimizer,
                                                          params['batch_size'], params['img_dim'],
                                                          params['n_masks'], device, logs, folder_path,
-                                                         writers, save_img=True)
+                                                         rel_path_s3, writers, save_img=False)
         test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, train_loader, test_loader, device,
                                                                      logs, folder_path, params['img_dim'],
-                                                                     params['n_masks'], writers, save_img=True)
+                                                                     params['n_masks'], writers, save_img=False)
         print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
-        numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
+        numerical_outputs = update_numerical_outputs(rel_path_s3, numerical_outputs, train_loss_epoch, test_loss_epoch,
                                                      train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch)
-    hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
-                                         device)
-    print(f'number of hard example: {len(hard_loader)}')
     # numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
     #     split_bregman_on_random_for_run(folder_path, params)
     save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag)
@@ -91,13 +90,16 @@ def build_optimizer(network, optimizer, learning_rate, weight_decay):
     return optimizer
 
 
-def update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch, train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch):
+def update_numerical_outputs(rel_path_s3, numerical_outputs, train_loss_epoch, test_loss_epoch, train_psnr_epoch, test_psnr_epoch, train_ssim_epoch, test_ssim_epoch):
     numerical_outputs['train_loss'].append(train_loss_epoch)
     numerical_outputs['test_loss'].append(test_loss_epoch)
     numerical_outputs['train_psnr'].append(train_psnr_epoch)
     numerical_outputs['test_psnr'].append(test_psnr_epoch)
     numerical_outputs['train_ssim'].append(train_ssim_epoch)
     numerical_outputs['test_ssim'].append(test_ssim_epoch)
+    file_path = os.path.join(rel_path_s3, 'numerical_outputs.pkl')
+    with open(file_path, 'wb') as file:
+        pickle.dump(numerical_outputs, file)
     return numerical_outputs
 
 
@@ -135,49 +137,6 @@ def get_test_images(folder_path):
     return all_images_tensor
 
 
-def hard_samples_extractor(trained_network, train_loader, cur_avg_loss, n_masks, img_dim, device):
-    pic_width = int(np.sqrt(img_dim))
-    hard_examples = []
-    with torch.no_grad():
-        for batch_index, sim_bucket_tensor in enumerate(train_loader):
-            sim_object, label = sim_bucket_tensor
-            sim_object = sim_object.view(-1, 1, img_dim).to(device)
-            input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
-            diffuser, prob_vectors = trained_network(input_sim_object)
-            diffuser_batch, sb_params_batch = modify_output(diffuser, prob_vectors)
-
-            loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sb_params_batch, sim_object, n_masks, img_dim,
-                                                         device)
-            if loss.item() > cur_avg_loss:
-                hard_examples.append((sim_object, label))
-
-    if len(hard_examples) == 0:
-        hard_loader = []
-    else:   
-        hard_loader = DataLoader(hard_examples, batch_size=train_loader.batch_size, shuffle=True)
-    return hard_loader
-
-
-def train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs, folder_path, writers,
-                       numerical_outputs, num_extra_epochs=10, wb_flag=False):
-    """Train the model on the hard examples"""
-    for epoch in range(num_extra_epochs):
-        start_epoch = time.time()
-        train_loss_epoch, train_psnr_epoch, train_ssim_epoch = train_epoch(epoch, network, hard_loader, optimizer,
-                                                                           params['batch_size'], params['img_dim'],
-                                                                           params['n_masks'], device,
-                                                                           logs, folder_path, writers, save_img=True)
-        print_training_messages(epoch, train_loss_epoch, lr, start_epoch, logs[0])
-        test_loss_epoch, test_psnr_epoch, test_ssim_epoch = test_net(epoch, network, hard_loader, test_loader, device,
-                                                                     logs, folder_path, params['img_dim'],
-                                                                     params['n_masks'], writers, save_img=True)
-        numerical_outputs = update_numerical_outputs(numerical_outputs, train_loss_epoch, test_loss_epoch,
-                                                     train_psnr_epoch, test_psnr_epoch, train_ssim_epoch,
-                                                     test_ssim_epoch)
-
-    return numerical_outputs
-
-
 def log_tb_batch_info(writers, logs, loss, batch_psnr, batch_ssim, step):
     log_tb = logs[1]
     log_cr = logs[2]
@@ -196,7 +155,7 @@ def log_tb_batch_info(writers, logs, loss, batch_psnr, batch_ssim, step):
 
 
 def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks, device, logs, folder_path,
-                writers, save_img=False, wb_flag=False):
+                rel_path_s3, writers, save_img=False, wb_flag=False):
     network.train()
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(loader.batch_sampler)
@@ -208,9 +167,9 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
         input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
         diffuser = network(input_sim_object)
-        diffuser_batch = modify_output(diffuser)
+        diffuser_batch = get_avg_output_batch(diffuser)
 
-        loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sim_object, n_masks, img_dim, device)
+        loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sim_object, n_masks, img_dim)
         optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(network.parameters(), max_norm=1.0)
@@ -235,6 +194,10 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
                                    folder_path, 'train_images', wb_flag)
 
     train_loss, train_psnr, train_ssim = cumu_loss / n_samples, cumu_psnr / n_samples, cumu_ssim / n_samples
+    path_weights = os.path.join(rel_path_s3, 'model_weights.pth')
+    if not os.path.exists(rel_path_s3):
+        os.makedirs(rel_path_s3)
+    torch.save(network.state_dict(), path_weights)
     if wb_flag:
         wandb.log({"Epoch": epoch, 'Train Loss': train_loss, 'Train PSNR': train_psnr, 'Train SSIM': train_ssim})
     #        try:

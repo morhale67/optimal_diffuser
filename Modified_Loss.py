@@ -4,7 +4,7 @@ from torch import nn
 from Lasso import sparse_encode
 
 
-def loss_function(diffuser, sim_object, n_masks, img_dim, device):
+def loss_function(diffuser, sim_object, n_masks, img_dim):
     criterion = nn.MSELoss()
     diffuser_batch = diffuser.reshape(-1, n_masks, img_dim)
     sim_object = sim_object.transpose(1, 2)

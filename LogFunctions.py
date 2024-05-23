@@ -11,7 +11,7 @@ def generate_log_tensorborad(model_name, cr_name, run_name):
     return log_tb, log_cr
 
 
-def print_run_info_to_log(p, folder_path='Logs/'):
+def print_run_info_to_log(p, run_number, folder_path='Logs/'):
     now = datetime.now()
     dt_string = now.strftime("%d_%m_%Y__%H_%M_%S")
     log_name = f"Log_{dt_string}.log"
@@ -47,7 +47,7 @@ def print_run_info_to_log(p, folder_path='Logs/'):
 
     # logger.info(f'number of fully connected layers in model: {p["n_fc"]}')
     logger.info('***************************************************************************\n\n')
-    run_name = f"bs_{p['batch_size']}wd_{p['weight_decay']}_lr_{p['lr']}"
+    run_name = f"run_number_{run_number}_bs_{p['batch_size']}wd_{p['weight_decay']}_lr_{p['lr']}"
     log_tb, log_cr = generate_log_tensorborad(p['model_name'], str(p['cr']), run_name)
     logs = [log_path, log_tb, log_cr]
     return logs, run_name

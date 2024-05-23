@@ -1,4 +1,6 @@
 import math
+import os.path
+
 import wandb
 from main_training import train, split_bregman_on_random_for_run
 from Params import get_run_parameters
@@ -18,16 +20,18 @@ def main():
 
 
 def search_parameters(p):
-    for lr in [0.01, 0.001]:
-        p['lr'] = lr
-        for bs in [32, 128, 512]:
-            p['batch_size'] = bs
-            for weight_decay in [1e-4]:
+    i = 0
+    for bs in [32, 128, 512]:
+        p['batch_size'] = bs
+        for lr in [0.01, 0.001]:
+            p['lr'] = lr
+            for weight_decay in [1e-4, 1e-5]:
                 p['weight_decay'] = weight_decay
-                for cr in [1, 2, 5, 10]:
+                for cr in [1]:
                     p['cr'] = cr
                     p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-                    run_model(p)
+                    run_model(p, i)
+                    i += 1
 
     print('finished successfully')
 
@@ -60,19 +64,26 @@ def spec_multiple_runs(p):
         p['lr'] = run[1]
         p['weight_decay'] = run[2]
         p['n_masks'] = math.floor(p['img_dim'] / p['cr'])
-        run_model(p)
+        run_model(p, run_number = i+1)
 
 
-def run_model(p):
+def run_model(p, run_number=0):
     try:
         folder_path = make_folder(p)
-        logs, run_name = print_run_info_to_log(p, folder_path)
+        logs, run_name = print_run_info_to_log(p, run_number, folder_path)
+
+        if p['AWS_machine']:
+            s3_path = 'Projects/data_to_s3'
+        else:
+            s3_path = 's3_mock'
+        writer_cr = SummaryWriter(f"{s3_path}/TB/cr_{p['cr']}")
+        writer_run = SummaryWriter(f"{s3_path}/TB/cr_{p['cr']}/{run_name}")
+        rel_path_s3 = os.path.join(s3_path, f"cr_{p['cr']}_{run_name}")
+
         print_and_log_message(f'learning rate: {p["lr"]}', logs[0])
-        writer_cr = SummaryWriter(f"TB/cr_{p['cr']}")
-        writer_run = SummaryWriter(f"TB/cr_{p['cr']}/{run_name}")
         print(f'run_name is {run_name}')
         writers = [writer_cr, writer_run]
-        train(p, logs, folder_path, writers)
+        train(p, logs, folder_path, rel_path_s3, writers)
         loss, psnr, ssim = split_bregman_on_random_for_run(folder_path, p)
         print_and_log_message(f'SB default and random masks - loss: {loss}, psnr: {psnr}, ssim: {ssim}', logs[0])
     except Exception as e:
