@@ -1,5 +1,4 @@
 import os
-
 import torch
 from torch import nn
 import wandb
@@ -22,19 +21,14 @@ def get_sb_params_batch(indices):
     return sb_params_batch
 
 
-def get_avg_output_batch(diffuser, prob_vectors):
+def get_avg_output_batch(diffuser):
     diffuser_batch = torch.mean(diffuser, dim=0)
-    sb_p_indices = []
-    for prob_vector in prob_vectors:
-        _, indice = torch.max(torch.mean(prob_vector, dim=0), 0)
-        sb_p_indices.append(indice.item())
-    return diffuser_batch, sb_p_indices
+    return diffuser_batch
 
 
-def modify_output(diffuser, prob_vectors):
-    diffuser_batch, sb_p_indices = get_avg_output_batch(diffuser, prob_vectors)
-    sb_params_batch = get_sb_params_batch(sb_p_indices)
-    return diffuser_batch, sb_params_batch
+def modify_output(diffuser):
+    diffuser_batch = get_avg_output_batch(diffuser)
+    return diffuser_batch
 
 
 def creat_diffuser_for_batch(trained_network, train_loader, img_dim, device):
@@ -43,8 +37,8 @@ def creat_diffuser_for_batch(trained_network, train_loader, img_dim, device):
         sim_object, _ = sim_bucket_tensor
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
         input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
-        diffuser, prob_vectors = trained_network(input_sim_object)
-        diffuser_batch, sb_params_batch = modify_output(diffuser, prob_vectors)
+        diffuser = trained_network(input_sim_object)
+        diffuser_batch = modify_output(diffuser)
         break
     return diffuser_batch, sb_params_batch
 
@@ -67,7 +61,7 @@ def log_tb_epoch_info(writers, logs, loss, batch_psnr, batch_ssim, step):
     return writers
 
 
-def test_diffuser(epoch, diffuser, sb_params, test_loader, device, logs, folder_path, img_dim, n_masks, writers,
+def test_diffuser(epoch, diffuser, test_loader, device, logs, folder_path, img_dim, n_masks, writers,
                   save_img, wb_flag=False):
     cumu_loss, cumu_psnr, cumu_ssim = 0, 0, 0
     n_batchs = len(test_loader.batch_sampler)
@@ -78,7 +72,7 @@ def test_diffuser(epoch, diffuser, sb_params, test_loader, device, logs, folder_
     for batch_index, sim_bucket_tensor in enumerate(test_loader):
         sim_object, _ = sim_bucket_tensor
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
-        loss, reconstruct_imgs_batch = loss_function(diffuser, sb_params, sim_object, n_masks, img_dim, device)
+        loss, reconstruct_imgs_batch = loss_function(diffuser, sim_object, n_masks, img_dim, device)
         cumu_loss += loss.item()
         torch.cuda.empty_cache()
         batch_psnr = calc_cumu_psnr_batch(reconstruct_imgs_batch, sim_object, pic_width)
@@ -103,7 +97,7 @@ def test_diffuser(epoch, diffuser, sb_params, test_loader, device, logs, folder_
 
 
 def test_net(epoch, trained_network, train_loader, test_loader, device, log_path, folder_path, img_dim, n_masks, writers, save_img):
-    diffuser, sb_params = creat_diffuser_for_batch(trained_network, train_loader, img_dim, device)
-    test_loss, test_psnr, test_ssim = test_diffuser(epoch, diffuser, sb_params, test_loader, device, log_path,
+    diffuser = creat_diffuser_for_batch(trained_network, train_loader, img_dim, device)
+    test_loss, test_psnr, test_ssim = test_diffuser(epoch, diffuser, test_loader, device, log_path,
                                                     folder_path, img_dim, n_masks, writers, save_img)
     return test_loss, test_psnr, test_ssim

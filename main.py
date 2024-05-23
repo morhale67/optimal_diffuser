@@ -20,7 +20,7 @@ def main():
 def search_parameters(p):
     for lr in [0.01, 0.001]:
         p['lr'] = lr
-        for bs in [20, 50, 100]:
+        for bs in [32, 128, 512]:
             p['batch_size'] = bs
             for weight_decay in [1e-4]:
                 p['weight_decay'] = weight_decay

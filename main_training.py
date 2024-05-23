@@ -1,5 +1,4 @@
 import os
-
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -53,10 +52,6 @@ def train(params, logs, folder_path, writers, wb_flag=False):
     hard_loader = hard_samples_extractor(network, train_loader, train_loss_epoch, params['n_masks'], params['img_dim'],
                                          device)
     print(f'number of hard example: {len(hard_loader)}')
-    if len(hard_loader) != 0:
-        numerical_outputs = train_hard_samples(network, hard_loader, test_loader, lr, params, optimizer, device, logs,
-                                           folder_path, writers, numerical_outputs)
-
     # numerical_outputs['rand_diff_loss'], numerical_outputs['rand_diff_psnr'], numerical_outputs['rand_diff_ssim'] = \
     #     split_bregman_on_random_for_run(folder_path, params)
     save_all_run_numerical_outputs(numerical_outputs, folder_path, wb_flag)
@@ -212,10 +207,10 @@ def train_epoch(epoch, network, loader, optimizer, batch_size, img_dim, n_masks,
         sim_object, _ = sim_bucket_tensor
         sim_object = sim_object.view(-1, 1, img_dim).to(device)
         input_sim_object = sim_object.view(-1, 1, pic_width, pic_width).to(device)
-        diffuser, prob_vectors = network(input_sim_object)
-        diffuser_batch, sb_params_batch = modify_output(diffuser, prob_vectors)
+        diffuser = network(input_sim_object)
+        diffuser_batch = modify_output(diffuser)
 
-        loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sb_params_batch, sim_object, n_masks, img_dim, device)
+        loss, reconstruct_imgs_batch = loss_function(diffuser_batch, sim_object, n_masks, img_dim, device)
         optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(network.parameters(), max_norm=1.0)

@@ -66,12 +66,6 @@ class ResConv(nn.Module):
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 128)
 
-        self.fc_diff = nn.Linear(128, n_masks * img_dim)
-        self.prob_vector1 = nn.Linear(128, 10)
-        self.prob_vector2 = nn.Linear(128, 10)
-        self.prob_vector3 = nn.Linear(128, 10)
-        self.prob_vector4 = nn.Linear(128, 10)
-
     def forward(self, x_i):
         x = self.conv1(x_i)
         x = self.res1(x)
@@ -85,16 +79,9 @@ class ResConv(nn.Module):
         x = self.fc3(x)
         x = torch.relu(x)
 
-        diffuser = self.fc_diff(x)
-        diffuser = torch.sigmoid(diffuser)
+        diffuser = torch.sigmoid(x)
 
-        prob_vector1 = self.prob_vector1(x)
-        prob_vector2 = self.prob_vector2(x)
-        prob_vector3 = self.prob_vector3(x)
-        prob_vector4 = self.prob_vector4(x)
-        prob_vectors = [prob_vector1, prob_vector2, prob_vector3, prob_vector4]
-
-        return diffuser, prob_vectors
+        return diffuser
 
 
 
